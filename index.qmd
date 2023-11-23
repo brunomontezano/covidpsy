@@ -18,6 +18,8 @@ copyright:
 date: today
 lang: en
 theme: journal
+execute:
+  message: false
 format:
   html:
     code-fold: true
@@ -48,7 +50,7 @@ df_loneliness <- df |> dplyr::select(
     ucla_total,
     ucla_total_w4,
     gender_birth,
-    heterossexual,
+    heterosexual = heterossexual,
     color,
     year_birth,
     education,
@@ -80,7 +82,7 @@ df_loneliness <- df |> dplyr::select(
 In this step, we selected `r ncol(df_loneliness)` variables. They are the
 following: UCLA total score on W1 (`ucla_total`), UCLA total score on W4
 (`ucla_total_w4`), gender at birth (`gender_birth`), heterossexual
-(`heterossexual`), skin color (`color`), birth year (`year_birth`), seven
+(`heterosexual`), skin color (`color`), birth year (`year_birth`), seven
 categories of education (`education`), three categories of education
 (`education_grouped`), five levels of household income (`household_income`),
 number of people in your house including you (`number_people_house`),
@@ -124,7 +126,7 @@ order to facilitate the data analysis. We'll go through the following steps:
    6 will be positive (`1`) and values $<$ 6 will be negative (`0`).
 2. Build an `age` variable based on `year_birth`.
 3. Create quadratic and cubic terms (variables) for age (i.e. `age_2` and
-   `age_3`).
+   `age_3`). We will also standardize all age variables with $z$-scores.
 4. Build a `combined_weight` variable that is the product of `sampling_weight`
    and `ipw_w4` to weight analysis for both demographics and attrition.
 5. Standardize PHQ-9 (`phq_total`) and GAD-7 (`gad_total`) scores with
@@ -143,19 +145,22 @@ order to facilitate the data analysis. We'll go through the following steps:
 11. Recode all variables to easy and interpretable category labels.
 12. Remove the following variables: `education`,
     `physical_activity_dichotomized`, `ucla_total`,
-    `ucla_total_w4`, `year_birth`.
+    `ucla_total_w4`, `year_birth`, `marijuana_frequency`, `classif_audit`.
 13. Relocate the variables (*not necessary* per se).
 
 ```{r feature-eng}
-df_loneliness |>
+df_loneliness <- df_loneliness |>
     dplyr::mutate(
         # Step 1: Outcome variable based on UCLA score at W4
-        outcome = as.factor(dplyr::if_else(ucla_total_w4 >= 6, "Yes", "No")),
+        outcome = dplyr::if_else(ucla_total_w4 >= 6, 1, 0),
         # Step 2: Age variable based on `year_birth`
         age = 2023 - year_birth,
         # Step 3: Create quadratic and cubic terms for age
         age_2 = age ^ 2,
         age_3 = age ^ 3,
+        dplyr::across(dplyr::starts_with("age"),
+            \(x) (x - mean(x)) / sd(x)
+        ),
         # Step 4: Build combined weight variable
         combined_weight = sampling_weight * ipw_w4,
         # Step 5: Standardize PHQ-9 and GAD-7 scores
@@ -164,18 +169,362 @@ df_loneliness |>
             \(x) (x - mean(x)) / sd(x)
         ),
         # Step 6: Dichotomize skin color in white/non-white subjects
-        color = dplyr::case_match(color,
+        color = as.factor(dplyr::case_match(color,
             "Branca" ~ "White",
             c("Parda", "Preta", "Amarela", "Indigena") ~ "Non-white"
-        ),
+        )),
         # Step 7: Dichotomize AUDIT risk score
-        classif_audit = classif_audit
-    )
-    
+        alcohol_risk = as.factor(dplyr::case_match(
+            classif_audit,
+            "baixo risco" ~ "Low risk",
+            c("risco moderado", "alto risco", "risco severo") ~ "High risk"
+        )),
+        # Step 8: Create cannabis use variable
+        cannabis_use = as.factor(dplyr::case_match( 
+            marijuana_frequency,
+            "Não" ~ "No",
+            c("Menos que semanalmente", "Semanalmente ou Diariamente") ~ "Yes"
+        )),
+        # Step 9: Recode sleep quality, friend and family relationships
+        dplyr::across(
+            c(sleep_quality, friend_relationship, family_relationship),
+            \(x) as.factor(dplyr::case_match(
+                as.character(x),
+                c("Ruim", "Ruins", "Regular", "Regulares") ~ "Worse",
+                c("Bom", "Bons", "Excelente", "Excelentes") ~ "Better"
+            ))
+        ),
+        # Step 10: Create three levels of socioeconomic status
+        household_income = as.factor(dplyr::case_match(
+            household_income,
+            c("A", "B") ~ "Upper",
+            "C" ~ "Middle",
+            c("D", "E") ~ "Lower"
+        )),
+        # Step 11: Recode some variable labels and adjust reference levels
+        heterosexual = as.factor(dplyr::case_match(
+            heterosexual,
+            "não" ~ "No",
+            "sim" ~ "Yes"
+        )),
+        social_distancing = as.factor(dplyr::case_match(
+            social_distancing,
+            "Sim" ~ "Yes",
+            "Não" ~ "No"
+        )),
+        education_grouped = relevel(
+            education_grouped,
+            ref = "Up to high-school"
+        )
+    ) |>
+    # Step 12: Remove some variables
+    dplyr::select(-c(education, physical_activity_dichotomized,
+                     ucla_total, ucla_total_w4, year_birth,
+                     marijuana_frequency, classif_audit)) |>
+    # Step 13: Relocate the outcome variable
+    dplyr::relocate(outcome, .before = dplyr::everything())
 ```
+
+The dataset is formatted as below:
+
+```{r print-after-eng}
+knitr::kable(head(df_loneliness, 10))
+```
+
+# 5. Descriptive analysis
+
+# 6. Bivariate analysis
+
+```{r function-to-confint-df}
+confint_df <- function(x) {
+    tibble::tibble(
+        lower = x[2, 1],
+        upper = x[2, 2]
+    )
+}
+
+```
+
+## 6.1. Sociodemographic domain
+
+```{r socio-domain}
+df_socio <- df_loneliness |> 
+    dplyr::select(
+        outcome,
+        age,
+        age_2,
+        age_3,
+        gender_birth,
+        heterosexual,
+        education_grouped,
+        household_income,
+        color,
+        unemployed,
+        combined_weight
+    )
+
+df_socio |>
+    purrr::keep(is.numeric) |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of numeric predictors of the sociodemographic domain."
+    )
+
+df_socio |>
+    dplyr::select(-dplyr::contains("age")) |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of categorical predictors of the sociodemographic domain."
+    )
+```
+
+## 6.2. Lifestyle domain
+
+```{r lifestyle-domain}
+df_ls <- df_loneliness |> 
+    dplyr::select(
+        outcome,
+        physical_activity_grouped,
+        sleep_quality,
+        family_relationship,
+        friend_relationship,
+        combined_weight
+    )
+
+df_ls |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of predictors of the lifestyle domain."
+    )
+```
+
+## 6.3. Social domain
+
+```{r social-domain}
+df_social <- df_loneliness |> 
+    dplyr::select(
+        outcome,
+        number_people_house,
+        combined_weight
+    )
+
+df_social |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of predictors of the social domain."
+    )
+```
+
+## 6.4. Clinical domain
+
+```{r clinical-domain}
+df_clinical <- df_loneliness |> 
+    dplyr::select(
+        outcome,
+        phq_total,
+        gad_total,
+        alcohol_risk,
+        cannabis_use,
+        combined_weight
+    )
+
+df_clinical |>
+    dplyr::select(-alcohol_risk, -cannabis_use) |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of depressive and anxiety symptoms."
+    )
+
+df_clinical |>
+    dplyr::select(-phq_total, -gad_total) |>
+    tidyr::pivot_longer(
+        c(-outcome, -combined_weight),
+        names_to = "predictor",
+        values_to = "value"
+    ) |>
+    dplyr::nest_by(predictor) |>
+    dplyr::mutate(mod = list(glm(outcome ~ value,
+                                 data = data,
+                                 family = poisson(link = "log"),
+                                 weights = combined_weight)),
+                  confint = list(suppressMessages(confint(mod)))) |>
+    dplyr::reframe(
+        broom::tidy(mod),
+        confint_df(confint)
+    ) |>
+    dplyr::filter(term != "(Intercept)") |>
+    dplyr::mutate(rr = exp(estimate),
+                  rr_lower = exp(lower),
+                  rr_upper = exp(upper)) |>
+    dplyr::select(
+        Variable = predictor,
+        Category = term,
+        `$\\beta$` = estimate,
+        SE = std.error,
+        RR = rr,
+        `RR (lower)` = rr_lower,
+        `RR (upper)` = rr_upper,
+        `p-value` = p.value
+    ) |>
+    knitr::kable(
+        digits = 3,
+        caption = "Bivariate analysis of alcohol risk and cannabis use."
+    )
+```
+
+# 7. Hierarchical multi-predictor Poisson regression
+
+## 7.1. Domain-based models
+
+## 7.2. Final model
 
 # Session information
 
 ```{r session-info}
-sessionInfo()
+sessioninfo::session_info()
 ```

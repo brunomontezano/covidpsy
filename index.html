@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Bruno Braga Montezano">
-<meta name="dcterms.date" content="2023-11-22">
+<meta name="dcterms.date" content="2023-11-23">
 
 <title>Lifestyle as a predictor of loneliness: a longitudinal study</title>
 <style>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2023</p>
+      <p class="date">November 23, 2023</p>
     </div>
   </div>
   
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ucla_total,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ucla_total_w4,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    gender_birth,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    heterossexual,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">heterosexual =</span> heterossexual,</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    color,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    year_birth,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    education,</span>
@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In this step, we selected 25 variables. They are the following: UCLA total score on W1 (<code>ucla_total</code>), UCLA total score on W4 (<code>ucla_total_w4</code>), gender at birth (<code>gender_birth</code>), heterossexual (<code>heterossexual</code>), skin color (<code>color</code>), birth year (<code>year_birth</code>), seven categories of education (<code>education</code>), three categories of education (<code>education_grouped</code>), five levels of household income (<code>household_income</code>), number of people in your house including you (<code>number_people_house</code>), unemployment (<code>unemployed</code>), social distancing (<code>social_distancing</code>), PHQ-9 total score at W1 (<code>phq_total</code>), GAD-7 total score at W1 (<code>gad_total</code>), AUDIT risk [4 categories] (<code>classif_audit</code>), cannabis use frequency (<code>marijuana_frequency</code>), physical activity [binary variable] (<code>physical_acitivty_dichotomized</code>), physical activity [more or less than 150min/week] (<code>physical_activity_grouped</code>), sleep quality [four categories] (<code>sleep_quality</code>), marital status [with or without partner] (<code>marital_status_grouped</code>), friend relationship quality (<code>friend_relationship</code>), family relationship quality (<code>family_relationship</code>), has a religion (<code>religion</code>), sampling weight for demographics (<code>sampling_weight</code>), weight for attrition at W4 (<code>ipw_w4</code>).</p>
+<p>In this step, we selected 25 variables. They are the following: UCLA total score on W1 (<code>ucla_total</code>), UCLA total score on W4 (<code>ucla_total_w4</code>), gender at birth (<code>gender_birth</code>), heterossexual (<code>heterosexual</code>), skin color (<code>color</code>), birth year (<code>year_birth</code>), seven categories of education (<code>education</code>), three categories of education (<code>education_grouped</code>), five levels of household income (<code>household_income</code>), number of people in your house including you (<code>number_people_house</code>), unemployment (<code>unemployed</code>), social distancing (<code>social_distancing</code>), PHQ-9 total score at W1 (<code>phq_total</code>), GAD-7 total score at W1 (<code>gad_total</code>), AUDIT risk [4 categories] (<code>classif_audit</code>), cannabis use frequency (<code>marijuana_frequency</code>), physical activity [binary variable] (<code>physical_acitivty_dichotomized</code>), physical activity [more or less than 150min/week] (<code>physical_activity_grouped</code>), sleep quality [four categories] (<code>sleep_quality</code>), marital status [with or without partner] (<code>marital_status_grouped</code>), friend relationship quality (<code>friend_relationship</code>), family relationship quality (<code>family_relationship</code>), has a religion (<code>religion</code>), sampling weight for demographics (<code>sampling_weight</code>), weight for attrition at W4 (<code>ipw_w4</code>).</p>
 <p>After the removal of subjects with missing values on UCLA at W1 or W4, we ended up with a dataset of 944 subjects.</p>
 <div class="cell">
 <details>
@@ -262,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;">Fem: 412, Mal: 61</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">heterossexual</td>
+<td style="text-align: left;">heterosexual</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">FALSE</td>
@@ -538,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Create an <code>outcome</code> variable based on UCLA total score at W4. Scores <span class="math inline">\(\geq\)</span> 6 will be positive (<code>1</code>) and values <span class="math inline">\(&lt;\)</span> 6 will be negative (<code>0</code>).</li>
 <li>Build an <code>age</code> variable based on <code>year_birth</code>.</li>
-<li>Create quadratic and cubic terms (variables) for age (i.e.&nbsp;<code>age_2</code> and <code>age_3</code>).</li>
+<li>Create quadratic and cubic terms (variables) for age (i.e.&nbsp;<code>age_2</code> and <code>age_3</code>). We will also standardize all age variables with <span class="math inline">\(z\)</span>-scores.</li>
 <li>Build a <code>combined_weight</code> variable that is the product of <code>sampling_weight</code> and <code>ipw_w4</code> to weight analysis for both demographics and attrition.</li>
 <li>Standardize PHQ-9 (<code>phq_total</code>) and GAD-7 (<code>gad_total</code>) scores with <span class="math inline">\(z\)</span>-scores to facilitate the interpretability of the coefficients.</li>
 <li>Dichotomize skin color variable (<code>color</code>) in white and non-white subjects.</li>
@@ -547,102 +547,1190 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Dichotomize the variables of quality of family relationships (<code>family_relationship</code>), quality of friendship relationships (<code>friend_relationship</code>), and sleep quality (<code>sleep_quality</code>) into two levels: Bad/Fair and Good/Excellent.</li>
 <li>Categorize the household income variable (<code>household_income</code>) into three levels of socioeconomic status: A/B (upper), C (middle) and D/E (lower).</li>
 <li>Recode all variables to easy and interpretable category labels.</li>
-<li>Remove the following variables: <code>education</code>, <code>physical_activity_dichotomized</code>, <code>ucla_total</code>, <code>ucla_total_w4</code>, <code>year_birth</code>.</li>
+<li>Remove the following variables: <code>education</code>, <code>physical_activity_dichotomized</code>, <code>ucla_total</code>, <code>ucla_total_w4</code>, <code>year_birth</code>, <code>marijuana_frequency</code>, <code>classif_audit</code>.</li>
 <li>Relocate the variables (<em>not necessary</em> per se).</li>
 </ol>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="ot">&lt;-</span> df_loneliness <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 1: Outcome variable based on UCLA score at W4</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">outcome =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">if_else</span>(ucla_total_w4 <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">outcome =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(ucla_total_w4 <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 2: Age variable based on `year_birth`</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">age =</span> <span class="dv">2023</span> <span class="sc">-</span> year_birth,</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 3: Create quadratic and cubic terms for age</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">age_2 =</span> age <span class="sc">^</span> <span class="dv">2</span>,</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">age_3 =</span> age <span class="sc">^</span> <span class="dv">3</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 4: Build combined weight variable</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">combined_weight =</span> sampling_weight <span class="sc">*</span> ipw_w4,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 5: Standardize PHQ-9 and GAD-7 scores</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">matches</span>(<span class="st">"^(phq|gad)_total$"</span>),</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            \(x) (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 6: Dichotomize skin color in white/non-white subjects</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> dplyr<span class="sc">::</span><span class="fu">case_match</span>(color,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Branca"</span> <span class="sc">~</span> <span class="st">"White"</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"Parda"</span>, <span class="st">"Preta"</span>, <span class="st">"Amarela"</span>, <span class="st">"Indigena"</span>) <span class="sc">~</span> <span class="st">"Non-white"</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 7: Dichotomize AUDIT risk score</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">classif_audit =</span> classif_audit</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(dplyr<span class="sc">::</span><span class="fu">starts_with</span>(<span class="st">"age"</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            \(x) (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 4: Build combined weight variable</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">combined_weight =</span> sampling_weight <span class="sc">*</span> ipw_w4,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 5: Standardize PHQ-9 and GAD-7 scores</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">matches</span>(<span class="st">"^(phq|gad)_total$"</span>),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            \(x) (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 6: Dichotomize skin color in white/non-white subjects</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(color,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Branca"</span> <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"Parda"</span>, <span class="st">"Preta"</span>, <span class="st">"Amarela"</span>, <span class="st">"Indigena"</span>) <span class="sc">~</span> <span class="st">"Non-white"</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 7: Dichotomize AUDIT risk score</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">alcohol_risk =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>            classif_audit,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"baixo risco"</span> <span class="sc">~</span> <span class="st">"Low risk"</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"risco moderado"</span>, <span class="st">"alto risco"</span>, <span class="st">"risco severo"</span>) <span class="sc">~</span> <span class="st">"High risk"</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 8: Create cannabis use variable</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">cannabis_use =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>( </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>            marijuana_frequency,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Não"</span> <span class="sc">~</span> <span class="st">"No"</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"Menos que semanalmente"</span>, <span class="st">"Semanalmente ou Diariamente"</span>) <span class="sc">~</span> <span class="st">"Yes"</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 9: Recode sleep quality, friend and family relationships</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(sleep_quality, friend_relationship, family_relationship),</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>            \(x) <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                <span class="fu">as.character</span>(x),</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"Ruim"</span>, <span class="st">"Ruins"</span>, <span class="st">"Regular"</span>, <span class="st">"Regulares"</span>) <span class="sc">~</span> <span class="st">"Worse"</span>,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"Bom"</span>, <span class="st">"Bons"</span>, <span class="st">"Excelente"</span>, <span class="st">"Excelentes"</span>) <span class="sc">~</span> <span class="st">"Better"</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>            ))</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 10: Create three levels of socioeconomic status</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">household_income =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>            household_income,</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>) <span class="sc">~</span> <span class="st">"Upper"</span>,</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>            <span class="st">"C"</span> <span class="sc">~</span> <span class="st">"Middle"</span>,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"D"</span>, <span class="st">"E"</span>) <span class="sc">~</span> <span class="st">"Lower"</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 11: Recode some variable labels and adjust reference levels</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">heterosexual =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>            heterosexual,</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"não"</span> <span class="sc">~</span> <span class="st">"No"</span>,</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sim"</span> <span class="sc">~</span> <span class="st">"Yes"</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">social_distancing =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>            social_distancing,</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Sim"</span> <span class="sc">~</span> <span class="st">"Yes"</span>,</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Não"</span> <span class="sc">~</span> <span class="st">"No"</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">education_grouped =</span> <span class="fu">relevel</span>(</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>            education_grouped,</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>            <span class="at">ref =</span> <span class="st">"Up to high-school"</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 12: Remove some variables</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(education, physical_activity_dichotomized,</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                     ucla_total, ucla_total_w4, year_birth,</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>                     marijuana_frequency, classif_audit)) <span class="sc">|&gt;</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 13: Relocate the outcome variable</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(outcome, <span class="at">.before =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 473 × 30
-   ucla_total ucla_total_w4 gender_birth heterossexual color     year_birth
-        &lt;dbl&gt;         &lt;dbl&gt; &lt;fct&gt;        &lt;fct&gt;         &lt;chr&gt;          &lt;dbl&gt;
- 1          3             3 Female       sim           Non-white       1994
- 2          5             3 Female       sim           White           1998
- 3          5             3 Female       sim           White           1968
- 4          4             3 Female       sim           Non-white       1964
- 5          3             3 Female       sim           White           1965
- 6          3             4 Female       sim           Non-white       1998
- 7          3             3 Female       sim           White           1980
- 8          4             6 Female       sim           Non-white       1991
- 9          5             3 Female       sim           White           1981
-10          4             5 Female       não           White           1979
-# ℹ 463 more rows
-# ℹ 24 more variables: education &lt;fct&gt;, education_grouped &lt;fct&gt;,
-#   household_income &lt;fct&gt;, number_people_house &lt;dbl&gt;, unemployed &lt;fct&gt;,
-#   social_distancing &lt;fct&gt;, phq_total &lt;dbl&gt;, gad_total &lt;dbl&gt;,
-#   classif_audit &lt;fct&gt;, marijuana_frequency &lt;fct&gt;,
-#   physical_activity_dichotomized &lt;fct&gt;, physical_activity_grouped &lt;fct&gt;,
-#   sleep_quality &lt;fct&gt;, marital_status_grouped &lt;fct&gt;, …</code></pre>
+</div>
+<p>The dataset is formatted as below:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df_loneliness, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">outcome</th>
+<th style="text-align: left;">gender_birth</th>
+<th style="text-align: left;">heterosexual</th>
+<th style="text-align: left;">color</th>
+<th style="text-align: left;">education_grouped</th>
+<th style="text-align: left;">household_income</th>
+<th style="text-align: right;">number_people_house</th>
+<th style="text-align: left;">unemployed</th>
+<th style="text-align: left;">social_distancing</th>
+<th style="text-align: right;">phq_total</th>
+<th style="text-align: right;">gad_total</th>
+<th style="text-align: left;">physical_activity_grouped</th>
+<th style="text-align: left;">sleep_quality</th>
+<th style="text-align: left;">marital_status_grouped</th>
+<th style="text-align: left;">friend_relationship</th>
+<th style="text-align: left;">family_relationship</th>
+<th style="text-align: left;">religion</th>
+<th style="text-align: right;">sampling_weight</th>
+<th style="text-align: right;">ipw_w4</th>
+<th style="text-align: right;">age</th>
+<th style="text-align: right;">age_2</th>
+<th style="text-align: right;">age_3</th>
+<th style="text-align: right;">combined_weight</th>
+<th style="text-align: left;">alcohol_risk</th>
+<th style="text-align: left;">cannabis_use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Non-white</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Lower</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">-0.7935850</td>
+<td style="text-align: right;">-1.3851317</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">0.3063481</td>
+<td style="text-align: right;">12.300424</td>
+<td style="text-align: right;">-1.0476520</td>
+<td style="text-align: right;">-0.9521512</td>
+<td style="text-align: right;">-0.8401656</td>
+<td style="text-align: right;">3.7682117</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Lower</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">-0.1541204</td>
+<td style="text-align: right;">-0.6589834</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Without partner</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">0.4129219</td>
+<td style="text-align: right;">5.857325</td>
+<td style="text-align: right;">-1.3782871</td>
+<td style="text-align: right;">-1.1495625</td>
+<td style="text-align: right;">-0.9498371</td>
+<td style="text-align: right;">2.4186181</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Master or Doctorate</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">0.6452103</td>
+<td style="text-align: right;">0.0671649</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">0.2446609</td>
+<td style="text-align: right;">5.910265</td>
+<td style="text-align: right;">1.1014763</td>
+<td style="text-align: right;">1.0438970</td>
+<td style="text-align: right;">0.9366279</td>
+<td style="text-align: right;">1.4460104</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Non-white</td>
+<td style="text-align: left;">Master or Doctorate</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">-1.1133173</td>
+<td style="text-align: right;">-0.1143722</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">0.1504424</td>
+<td style="text-align: right;">6.925452</td>
+<td style="text-align: right;">1.4321114</td>
+<td style="text-align: right;">1.4606543</td>
+<td style="text-align: right;">1.4247186</td>
+<td style="text-align: right;">1.0418815</td>
+<td style="text-align: left;">High risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">1.1248087</td>
+<td style="text-align: right;">0.4302390</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Without partner</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">0.1970159</td>
+<td style="text-align: right;">8.664241</td>
+<td style="text-align: right;">1.3494526</td>
+<td style="text-align: right;">1.3537231</td>
+<td style="text-align: right;">1.2962388</td>
+<td style="text-align: right;">1.7069930</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Non-white</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">-0.4738527</td>
+<td style="text-align: right;">-0.6589834</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">0.1352377</td>
+<td style="text-align: right;">9.693859</td>
+<td style="text-align: right;">-1.3782871</td>
+<td style="text-align: right;">-1.1495625</td>
+<td style="text-align: right;">-0.9498371</td>
+<td style="text-align: right;">1.3109755</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Lower</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">0.9649426</td>
+<td style="text-align: right;">1.7009985</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">0.6710622</td>
+<td style="text-align: right;">8.782572</td>
+<td style="text-align: right;">0.1095709</td>
+<td style="text-align: right;">-0.0308982</td>
+<td style="text-align: right;">-0.1504265</td>
+<td style="text-align: right;">5.8936524</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Non-white</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">-0.1541204</td>
+<td style="text-align: right;">0.0671649</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">With partner</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: right;">0.1287050</td>
+<td style="text-align: right;">5.551102</td>
+<td style="text-align: right;">-0.7996756</td>
+<td style="text-align: right;">-0.7848999</td>
+<td style="text-align: right;">-0.7353119</td>
+<td style="text-align: right;">0.7144546</td>
+<td style="text-align: left;">High risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Master or Doctorate</td>
+<td style="text-align: left;">Upper</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">-0.9534511</td>
+<td style="text-align: right;">-0.8405205</td>
+<td style="text-align: left;">More than 150min/week</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Without partner</td>
+<td style="text-align: left;">Worse</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">0.1343119</td>
+<td style="text-align: right;">5.111151</td>
+<td style="text-align: right;">0.0269122</td>
+<td style="text-align: right;">-0.1085832</td>
+<td style="text-align: right;">-0.2182391</td>
+<td style="text-align: right;">0.6864886</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Some college education</td>
+<td style="text-align: left;">Lower</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">1.1248087</td>
+<td style="text-align: right;">1.1563873</td>
+<td style="text-align: left;">Less than 150min/week</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Without partner</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Better</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: right;">9.9837119</td>
+<td style="text-align: right;">6.017146</td>
+<td style="text-align: right;">0.1922297</td>
+<td style="text-align: right;">0.0486147</td>
+<td style="text-align: right;">-0.0793853</td>
+<td style="text-align: right;">60.0734511</td>
+<td style="text-align: left;">Low risk</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+</section>
+<section id="descriptive-analysis" class="level1">
+<h1>5. Descriptive analysis</h1>
+</section>
+<section id="bivariate-analysis" class="level1">
+<h1>6. Bivariate analysis</h1>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>confint_df <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">lower =</span> x[<span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">upper =</span> x[<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="sociodemographic-domain" class="level2">
+<h2 class="anchored" data-anchor-id="sociodemographic-domain">6.1. Sociodemographic domain</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_socio <span class="ot">&lt;-</span> df_loneliness <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        outcome,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        age,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        age_2,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        age_3,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        gender_birth,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        heterosexual,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        education_grouped,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        household_income,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        color,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        unemployed,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        combined_weight</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>df_socio <span class="sc">|&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">keep</span>(is.numeric) <span class="sc">|&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of numeric predictors of the sociodemographic domain."</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of numeric predictors of the sociodemographic domain.</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">-0.089</td>
+<td style="text-align: right;">0.033</td>
+<td style="text-align: right;">0.914</td>
+<td style="text-align: right;">0.856</td>
+<td style="text-align: right;">0.976</td>
+<td style="text-align: right;">0.007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age_2</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">-0.055</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">0.946</td>
+<td style="text-align: right;">0.889</td>
+<td style="text-align: right;">1.005</td>
+<td style="text-align: right;">0.076</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age_3</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">-0.030</td>
+<td style="text-align: right;">0.029</td>
+<td style="text-align: right;">0.970</td>
+<td style="text-align: right;">0.916</td>
+<td style="text-align: right;">1.025</td>
+<td style="text-align: right;">0.288</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_socio <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>dplyr<span class="sc">::</span><span class="fu">contains</span>(<span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of categorical predictors of the sociodemographic domain."</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of categorical predictors of the sociodemographic domain.</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 29%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">valueWhite</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">1.074</td>
+<td style="text-align: right;">0.934</td>
+<td style="text-align: right;">1.234</td>
+<td style="text-align: right;">0.314</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education_grouped</td>
+<td style="text-align: left;">valueSome college education</td>
+<td style="text-align: right;">-0.552</td>
+<td style="text-align: right;">0.088</td>
+<td style="text-align: right;">0.576</td>
+<td style="text-align: right;">0.484</td>
+<td style="text-align: right;">0.685</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education_grouped</td>
+<td style="text-align: left;">valueMaster or Doctorate</td>
+<td style="text-align: right;">-0.489</td>
+<td style="text-align: right;">0.087</td>
+<td style="text-align: right;">0.614</td>
+<td style="text-align: right;">0.484</td>
+<td style="text-align: right;">0.685</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gender_birth</td>
+<td style="text-align: left;">valueMale</td>
+<td style="text-align: right;">-0.804</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">0.448</td>
+<td style="text-align: right;">0.386</td>
+<td style="text-align: right;">0.518</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">heterosexual</td>
+<td style="text-align: left;">valueYes</td>
+<td style="text-align: right;">-0.253</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.776</td>
+<td style="text-align: right;">0.668</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household_income</td>
+<td style="text-align: left;">valueMiddle</td>
+<td style="text-align: right;">0.220</td>
+<td style="text-align: right;">0.112</td>
+<td style="text-align: right;">1.246</td>
+<td style="text-align: right;">0.995</td>
+<td style="text-align: right;">1.543</td>
+<td style="text-align: right;">0.049</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">household_income</td>
+<td style="text-align: left;">valueUpper</td>
+<td style="text-align: right;">-0.122</td>
+<td style="text-align: right;">0.097</td>
+<td style="text-align: right;">0.885</td>
+<td style="text-align: right;">0.995</td>
+<td style="text-align: right;">1.543</td>
+<td style="text-align: right;">0.209</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unemployed</td>
+<td style="text-align: left;">valueYes</td>
+<td style="text-align: right;">0.263</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">1.300</td>
+<td style="text-align: right;">1.129</td>
+<td style="text-align: right;">1.495</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="lifestyle-domain" class="level2">
+<h2 class="anchored" data-anchor-id="lifestyle-domain">6.2. Lifestyle domain</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_ls <span class="ot">&lt;-</span> df_loneliness <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        outcome,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        physical_activity_grouped,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        sleep_quality,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        family_relationship,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        friend_relationship,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        combined_weight</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>df_ls <span class="sc">|&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of predictors of the lifestyle domain."</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of predictors of the lifestyle domain.</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 26%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">family_relationship</td>
+<td style="text-align: left;">valueWorse</td>
+<td style="text-align: right;">0.618</td>
+<td style="text-align: right;">0.074</td>
+<td style="text-align: right;">1.856</td>
+<td style="text-align: right;">1.604</td>
+<td style="text-align: right;">2.142</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_relationship</td>
+<td style="text-align: left;">valueWorse</td>
+<td style="text-align: right;">0.287</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">1.332</td>
+<td style="text-align: right;">1.159</td>
+<td style="text-align: right;">1.531</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">physical_activity_grouped</td>
+<td style="text-align: left;">valueMore than 150min/week</td>
+<td style="text-align: right;">-1.771</td>
+<td style="text-align: right;">0.349</td>
+<td style="text-align: right;">0.170</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0.315</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sleep_quality</td>
+<td style="text-align: left;">valueWorse</td>
+<td style="text-align: right;">1.301</td>
+<td style="text-align: right;">0.095</td>
+<td style="text-align: right;">3.672</td>
+<td style="text-align: right;">3.061</td>
+<td style="text-align: right;">4.440</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="social-domain" class="level2">
+<h2 class="anchored" data-anchor-id="social-domain">6.3. Social domain</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_social <span class="ot">&lt;-</span> df_loneliness <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        outcome,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        number_people_house,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        combined_weight</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df_social <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of predictors of the social domain."</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of predictors of the social domain.</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">number_people_house</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">-0.146</td>
+<td style="text-align: right;">0.024</td>
+<td style="text-align: right;">0.864</td>
+<td style="text-align: right;">0.824</td>
+<td style="text-align: right;">0.906</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="clinical-domain" class="level2">
+<h2 class="anchored" data-anchor-id="clinical-domain">6.4. Clinical domain</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_clinical <span class="ot">&lt;-</span> df_loneliness <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        outcome,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        phq_total,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        gad_total,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        alcohol_risk,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        cannabis_use,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        combined_weight</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>df_clinical <span class="sc">|&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>alcohol_risk, <span class="sc">-</span>cannabis_use) <span class="sc">|&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of depressive and anxiety symptoms."</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of depressive and anxiety symptoms.</caption>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">gad_total</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">0.531</td>
+<td style="text-align: right;">0.034</td>
+<td style="text-align: right;">1.70</td>
+<td style="text-align: right;">1.591</td>
+<td style="text-align: right;">1.818</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">phq_total</td>
+<td style="text-align: left;">value</td>
+<td style="text-align: right;">0.513</td>
+<td style="text-align: right;">0.029</td>
+<td style="text-align: right;">1.67</td>
+<td style="text-align: right;">1.577</td>
+<td style="text-align: right;">1.769</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_clinical <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>phq_total, <span class="sc">-</span>gad_total) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="sc">-</span>outcome, <span class="sc">-</span>combined_weight),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"predictor"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">nest_by</span>(predictor) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">glm</span>(outcome <span class="sc">~</span> value,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">data =</span> data,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">weights =</span> combined_weight)),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">confint =</span> <span class="fu">list</span>(<span class="fu">suppressMessages</span>(<span class="fu">confint</span>(mod)))) <span class="sc">|&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">reframe</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        broom<span class="sc">::</span><span class="fu">tidy</span>(mod),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">confint_df</span>(confint)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rr =</span> <span class="fu">exp</span>(estimate),</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_lower =</span> <span class="fu">exp</span>(lower),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rr_upper =</span> <span class="fu">exp</span>(upper)) <span class="sc">|&gt;</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">Variable =</span> predictor,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">Category =</span> term,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">$</span><span class="sc">\\</span><span class="at">beta$</span><span class="st">`</span> <span class="ot">=</span> estimate,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">SE =</span> std.error,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">RR =</span> rr,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (lower)</span><span class="st">`</span> <span class="ot">=</span> rr_lower,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">RR (upper)</span><span class="st">`</span> <span class="ot">=</span> rr_upper,</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> p.value</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Bivariate analysis of alcohol risk and cannabis use."</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Bivariate analysis of alcohol risk and cannabis use.</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;"><span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">alcohol_risk</td>
+<td style="text-align: left;">valueLow risk</td>
+<td style="text-align: right;">-0.916</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">0.400</td>
+<td style="text-align: right;">0.348</td>
+<td style="text-align: right;">0.460</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cannabis_use</td>
+<td style="text-align: left;">valueYes</td>
+<td style="text-align: right;">0.301</td>
+<td style="text-align: right;">0.146</td>
+<td style="text-align: right;">1.351</td>
+<td style="text-align: right;">1.003</td>
+<td style="text-align: right;">1.778</td>
+<td style="text-align: right;">0.039</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="hierarchical-multi-predictor-poisson-regression" class="level1">
+<h1>7. Hierarchical multi-predictor Poisson regression</h1>
+<section id="domain-based-models" class="level2">
+<h2 class="anchored" data-anchor-id="domain-based-models">7.1. Domain-based models</h2>
+</section>
+<section id="final-model" class="level2">
+<h2 class="anchored" data-anchor-id="final-model">7.2. Final model</h2>
+</section>
 </section>
 <section id="session-information" class="level1">
 <h1>Session information</h1>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Arch Linux
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       Arch Linux
+ system   x86_64, linux-gnu
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       America/Sao_Paulo
+ date     2023-11-23
+ pandoc   3.1.9 @ /usr/bin/ (via rmarkdown)
 
-Matrix products: default
-BLAS/LAPACK: /usr/lib/libopenblas.so.0.3;  LAPACK version 3.11.0
+─ Packages ───────────────────────────────────────────────────────────────────
+ package     * version date (UTC) lib source
+ backports     1.4.1   2021-12-13 [1] CRAN (R 4.2.2)
+ base64enc     0.1-3   2015-07-28 [1] CRAN (R 4.2.2)
+ broom         1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
+ cli           3.6.1   2023-03-23 [1] CRAN (R 4.2.3)
+ digest        0.6.33  2023-07-07 [1] CRAN (R 4.3.1)
+ dplyr         1.1.4   2023-11-17 [1] CRAN (R 4.3.2)
+ evaluate      0.23    2023-11-01 [1] CRAN (R 4.3.2)
+ fansi         1.0.5   2023-10-08 [1] CRAN (R 4.3.1)
+ fastmap       1.1.1   2023-02-24 [1] CRAN (R 4.2.2)
+ forcats       1.0.0   2023-01-29 [1] CRAN (R 4.2.2)
+ generics      0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
+ glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.2)
+ haven         2.5.3   2023-06-30 [1] CRAN (R 4.3.1)
+ hms           1.1.3   2023-03-21 [1] CRAN (R 4.2.3)
+ htmltools     0.5.7   2023-11-03 [1] CRAN (R 4.3.2)
+ htmlwidgets   1.6.2   2023-03-17 [1] CRAN (R 4.2.3)
+ janitor       2.2.0   2023-02-02 [1] CRAN (R 4.2.2)
+ jsonlite      1.8.7   2023-06-29 [1] CRAN (R 4.3.1)
+ knitr         1.45    2023-10-30 [1] CRAN (R 4.3.1)
+ lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.3.2)
+ lubridate     1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
+ magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
+ MASS          7.3-60  2023-05-04 [1] CRAN (R 4.3.0)
+ pillar        1.9.0   2023-03-22 [1] CRAN (R 4.2.3)
+ pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
+ purrr         1.0.2   2023-08-10 [1] CRAN (R 4.3.1)
+ R6            2.5.1   2021-08-19 [1] CRAN (R 4.2.2)
+ readr         2.1.4   2023-02-10 [1] CRAN (R 4.2.2)
+ repr          1.1.6   2023-01-26 [1] CRAN (R 4.2.3)
+ rlang         1.1.2   2023-11-04 [1] CRAN (R 4.3.2)
+ rmarkdown     2.25    2023-09-18 [1] CRAN (R 4.3.1)
+ sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
+ skimr         2.1.5   2022-12-23 [1] CRAN (R 4.2.3)
+ snakecase     0.11.1  2023-08-27 [1] CRAN (R 4.3.1)
+ stringi       1.8.1   2023-11-13 [1] CRAN (R 4.3.2)
+ stringr       1.5.1   2023-11-14 [1] CRAN (R 4.3.2)
+ tibble        3.2.1   2023-03-20 [1] CRAN (R 4.2.3)
+ tidyr         1.3.0   2023-01-24 [1] CRAN (R 4.2.2)
+ tidyselect    1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
+ timechange    0.2.0   2023-01-11 [1] CRAN (R 4.2.2)
+ tzdb          0.4.0   2023-05-12 [1] CRAN (R 4.3.0)
+ utf8          1.2.4   2023-10-22 [1] CRAN (R 4.3.1)
+ vctrs         0.6.4   2023-10-12 [1] CRAN (R 4.3.1)
+ withr         2.5.2   2023-10-30 [1] CRAN (R 4.3.1)
+ xfun          0.41    2023-11-01 [1] CRAN (R 4.3.2)
+ yaml          2.3.7   2023-01-23 [1] CRAN (R 4.2.2)
 
-locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] /home/bruno/.local/share/r
+ [2] /usr/lib/R/library
 
-time zone: America/Sao_Paulo
-tzcode source: system (glibc)
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] jsonlite_1.8.7    dplyr_1.1.4       compiler_4.3.2    tidyselect_1.2.0 
- [5] stringr_1.5.1     snakecase_0.11.1  tidyr_1.3.0       yaml_2.3.7       
- [9] fastmap_1.1.1     readr_2.1.4       R6_2.5.1          generics_0.1.3   
-[13] skimr_2.1.5       knitr_1.45        htmlwidgets_1.6.2 forcats_1.0.0    
-[17] tibble_3.2.1      janitor_2.2.0     lubridate_1.9.3   pillar_1.9.0     
-[21] tzdb_0.4.0        rlang_1.1.2       utf8_1.2.4        stringi_1.8.1    
-[25] repr_1.1.6        xfun_0.41         timechange_0.2.0  cli_3.6.1        
-[29] withr_2.5.2       magrittr_2.0.3    digest_0.6.33     haven_2.5.3      
-[33] base64enc_0.1-3   hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.4      
-[37] evaluate_0.23     glue_1.6.2        fansi_1.0.5       purrr_1.0.2      
-[41] rmarkdown_2.25    tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.7  </code></pre>
+──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
 </div>
 </section>
