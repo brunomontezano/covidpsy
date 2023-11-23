@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In this step, we selected 25 variables. They are the following: UCLA total score on W1 (<code>ucla_total</code>), UCLA total score on W4 (<code>ucla_total_w4</code>), gender at birth (<code>gender_birth</code>), heterossexual (<code>heterosexual</code>), skin color (<code>color</code>), birth year (<code>year_birth</code>), seven categories of education (<code>education</code>), three categories of education (<code>education_grouped</code>), five levels of household income (<code>household_income</code>), number of people in your house including you (<code>number_people_house</code>), unemployment (<code>unemployed</code>), social distancing (<code>social_distancing</code>), PHQ-9 total score at W1 (<code>phq_total</code>), GAD-7 total score at W1 (<code>gad_total</code>), AUDIT risk [4 categories] (<code>classif_audit</code>), cannabis use frequency (<code>marijuana_frequency</code>), physical activity [binary variable] (<code>physical_acitivty_dichotomized</code>), physical activity [more or less than 150min/week] (<code>physical_activity_grouped</code>), sleep quality [four categories] (<code>sleep_quality</code>), marital status [with or without partner] (<code>marital_status_grouped</code>), friend relationship quality (<code>friend_relationship</code>), family relationship quality (<code>family_relationship</code>), has a religion (<code>religion</code>), sampling weight for demographics (<code>sampling_weight</code>), weight for attrition at W4 (<code>ipw_w4</code>).</p>
+<p>In this step, we selected 25 variables. They are the following: UCLA total score on W1 (<code>ucla_total</code>), UCLA total score on W4 (<code>ucla_total_w4</code>), gender at birth (<code>gender_birth</code>), heterosexual (<code>heterosexual</code>), skin color (<code>color</code>), birth year (<code>year_birth</code>), seven categories of education (<code>education</code>), three categories of education (<code>education_grouped</code>), five levels of household income (<code>household_income</code>), number of people in your house including you (<code>number_people_house</code>), unemployment (<code>unemployed</code>), social distancing (<code>social_distancing</code>), PHQ-9 total score at W1 (<code>phq_total</code>), GAD-7 total score at W1 (<code>gad_total</code>), AUDIT risk [4 categories] (<code>classif_audit</code>), cannabis use frequency (<code>marijuana_frequency</code>), physical activity [binary variable] (<code>physical_acitivty_dichotomized</code>), physical activity [more or less than 150min/week] (<code>physical_activity_grouped</code>), sleep quality [four categories] (<code>sleep_quality</code>), marital status [with or without partner] (<code>marital_status_grouped</code>), friend relationship quality (<code>friend_relationship</code>), family relationship quality (<code>family_relationship</code>), has a religion (<code>religion</code>), sampling weight for demographics (<code>sampling_weight</code>), weight for attrition at W4 (<code>ipw_w4</code>).</p>
 <p>After the removal of subjects with missing values on UCLA at W1 or W4, we ended up with a dataset of 944 subjects.</p>
 <div class="cell">
 <details>
@@ -606,11 +606,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">"D"</span>, <span class="st">"E"</span>) <span class="sc">~</span> <span class="st">"Lower"</span></span>
 <span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        )),</span>
 <span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 11: Recode some variable labels and adjust reference levels</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">heterosexual =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">heterosexual =</span> <span class="fu">relevel</span>(<span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>            heterosexual,</span>
 <span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"não"</span> <span class="sc">~</span> <span class="st">"No"</span>,</span>
 <span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"sim"</span> <span class="sc">~</span> <span class="st">"Yes"</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>        )), <span class="at">ref =</span> <span class="st">"Yes"</span>),</span>
 <span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">social_distancing =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
 <span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>            social_distancing,</span>
 <span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Sim"</span> <span class="sc">~</span> <span class="st">"Yes"</span>,</span>
@@ -619,14 +619,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">education_grouped =</span> <span class="fu">relevel</span>(</span>
 <span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>            education_grouped,</span>
 <span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>            <span class="at">ref =</span> <span class="st">"Up to high-school"</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 12: Remove some variables</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(education, physical_activity_dichotomized,</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                     ucla_total, ucla_total_w4, year_birth,</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>                     marijuana_frequency, classif_audit)) <span class="sc">|&gt;</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 13: Relocate the outcome variable</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(outcome, <span class="at">.before =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">alcohol_risk =</span> <span class="fu">relevel</span>(</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>            alcohol_risk,</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>            <span class="at">ref =</span> <span class="st">"Low risk"</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>        <span class="at">gender_birth =</span> <span class="fu">relevel</span>(</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>            gender_birth,</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>            <span class="at">ref =</span> <span class="st">"Male"</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 12: Remove some variables</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(education, physical_activity_dichotomized,</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>                     ucla_total, ucla_total_w4, year_birth,</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>                     marijuana_frequency, classif_audit)) <span class="sc">|&gt;</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Step 13: Relocate the outcome variable</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(outcome, <span class="at">.before =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The dataset is formatted as below:</p>
@@ -1196,22 +1204,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">gender_birth</td>
-<td style="text-align: left;">valueMale</td>
-<td style="text-align: right;">-0.804</td>
+<td style="text-align: left;">valueFemale</td>
+<td style="text-align: right;">0.804</td>
 <td style="text-align: right;">0.075</td>
-<td style="text-align: right;">0.448</td>
-<td style="text-align: right;">0.386</td>
-<td style="text-align: right;">0.518</td>
+<td style="text-align: right;">2.234</td>
+<td style="text-align: right;">1.930</td>
+<td style="text-align: right;">2.591</td>
 <td style="text-align: right;">0.000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">heterosexual</td>
-<td style="text-align: left;">valueYes</td>
-<td style="text-align: right;">-0.253</td>
+<td style="text-align: left;">valueNo</td>
+<td style="text-align: right;">0.253</td>
 <td style="text-align: right;">0.078</td>
-<td style="text-align: right;">0.776</td>
-<td style="text-align: right;">0.668</td>
-<td style="text-align: right;">0.905</td>
+<td style="text-align: right;">1.288</td>
+<td style="text-align: right;">1.105</td>
+<td style="text-align: right;">1.498</td>
 <td style="text-align: right;">0.001</td>
 </tr>
 <tr class="even">
@@ -1236,12 +1244,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">unemployed</td>
-<td style="text-align: left;">valueYes</td>
-<td style="text-align: right;">0.263</td>
+<td style="text-align: left;">valueNo</td>
+<td style="text-align: right;">-0.263</td>
 <td style="text-align: right;">0.072</td>
-<td style="text-align: right;">1.300</td>
-<td style="text-align: right;">1.129</td>
-<td style="text-align: right;">1.495</td>
+<td style="text-align: right;">0.769</td>
+<td style="text-align: right;">0.669</td>
+<td style="text-align: right;">0.885</td>
 <td style="text-align: right;">0.000</td>
 </tr>
 </tbody>
@@ -1601,7 +1609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <caption>Bivariate analysis of alcohol risk and cannabis use.</caption>
 <colgroup>
 <col style="width: 16%">
-<col style="width: 18%">
+<col style="width: 19%">
 <col style="width: 10%">
 <col style="width: 7%">
 <col style="width: 7%">
@@ -1624,12 +1632,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">alcohol_risk</td>
-<td style="text-align: left;">valueLow risk</td>
-<td style="text-align: right;">-0.916</td>
+<td style="text-align: left;">valueHigh risk</td>
+<td style="text-align: right;">0.916</td>
 <td style="text-align: right;">0.072</td>
-<td style="text-align: right;">0.400</td>
-<td style="text-align: right;">0.348</td>
-<td style="text-align: right;">0.460</td>
+<td style="text-align: right;">2.500</td>
+<td style="text-align: right;">2.172</td>
+<td style="text-align: right;">2.875</td>
 <td style="text-align: right;">0.000</td>
 </tr>
 <tr class="even">
@@ -1652,9 +1660,850 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>7. Hierarchical multi-predictor Poisson regression</h1>
 <section id="domain-based-models" class="level2">
 <h2 class="anchored" data-anchor-id="domain-based-models">7.1. Domain-based models</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sociodemographic domain - first entry</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        heterosexual <span class="sc">+</span> household_income,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> _,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">weights =</span> combined_weight</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>statistic, <span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(estimate, conf.low, conf.high),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                                exp)) <span class="sc">|&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(p.value, <span class="at">.after =</span> dplyr<span class="sc">::</span><span class="fu">last_col</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(estimate, <span class="at">.before =</span> conf.low) <span class="sc">|&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p_lt_01 =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">set_names</span>(</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Variable"</span>, <span class="st">"RR"</span>, <span class="st">"RR (lower)"</span>, <span class="st">"RR (upper)"</span>, <span class="st">"$p$-value"</span>, <span class="st">"$p&lt;0.1$"</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Weighted poisson regression with $p$-value</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="st">        $&lt;$ 0.2 in bivariate analysis in sociodemographic domain - first entry."</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in sociodemographic domain - first entry.</caption>
+<colgroup>
+<col style="width: 46%">
+<col style="width: 6%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span>-value</th>
+<th style="text-align: left;"><span class="math inline">\(p&lt;0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.387</td>
+<td style="text-align: right;">0.270</td>
+<td style="text-align: right;">0.558</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age_2</td>
+<td style="text-align: right;">2.652</td>
+<td style="text-align: right;">1.861</td>
+<td style="text-align: right;">3.743</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education_groupedSome college education</td>
+<td style="text-align: right;">0.406</td>
+<td style="text-align: right;">0.335</td>
+<td style="text-align: right;">0.491</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education_groupedMaster or Doctorate</td>
+<td style="text-align: right;">0.460</td>
+<td style="text-align: right;">0.375</td>
+<td style="text-align: right;">0.563</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gender_birthFemale</td>
+<td style="text-align: right;">2.804</td>
+<td style="text-align: right;">2.386</td>
+<td style="text-align: right;">3.304</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">heterosexualNo</td>
+<td style="text-align: right;">2.510</td>
+<td style="text-align: right;">2.087</td>
+<td style="text-align: right;">3.012</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">household_incomeMiddle</td>
+<td style="text-align: right;">1.298</td>
+<td style="text-align: right;">1.026</td>
+<td style="text-align: right;">1.625</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household_incomeUpper</td>
+<td style="text-align: right;">1.171</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">1.466</td>
+<td style="text-align: right;">0.173</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lifestyle domain - second entry</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        friend_relationship <span class="sc">+</span> physical_activity_grouped <span class="sc">+</span> sleep_quality,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> _,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">weights =</span> combined_weight</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>statistic, <span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(estimate, conf.low, conf.high),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                                exp)) <span class="sc">|&gt;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(p.value, <span class="at">.after =</span> dplyr<span class="sc">::</span><span class="fu">last_col</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(estimate, <span class="at">.before =</span> conf.low) <span class="sc">|&gt;</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p_lt_01 =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">set_names</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Variable"</span>, <span class="st">"RR"</span>, <span class="st">"RR (lower)"</span>, <span class="st">"RR (upper)"</span>, <span class="st">"$p$-value"</span>, <span class="st">"$p&lt;0.1$"</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Weighted poisson regression with $p$-value</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="st">        $&lt;$ 0.2 in bivariate analysis in lifestyle domain - second entry."</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in lifestyle domain - second entry.</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span>-value</th>
+<th style="text-align: left;"><span class="math inline">\(p&lt;0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.681</td>
+<td style="text-align: right;">0.453</td>
+<td style="text-align: right;">1.033</td>
+<td style="text-align: right;">0.067</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age_2</td>
+<td style="text-align: right;">1.568</td>
+<td style="text-align: right;">1.051</td>
+<td style="text-align: right;">2.316</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education_groupedSome college education</td>
+<td style="text-align: right;">0.531</td>
+<td style="text-align: right;">0.438</td>
+<td style="text-align: right;">0.644</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education_groupedMaster or Doctorate</td>
+<td style="text-align: right;">0.453</td>
+<td style="text-align: right;">0.366</td>
+<td style="text-align: right;">0.561</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gender_birthFemale</td>
+<td style="text-align: right;">2.381</td>
+<td style="text-align: right;">1.984</td>
+<td style="text-align: right;">2.864</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">heterosexualNo</td>
+<td style="text-align: right;">2.226</td>
+<td style="text-align: right;">1.840</td>
+<td style="text-align: right;">2.686</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">household_incomeMiddle</td>
+<td style="text-align: right;">1.456</td>
+<td style="text-align: right;">1.155</td>
+<td style="text-align: right;">1.817</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household_incomeUpper</td>
+<td style="text-align: right;">1.353</td>
+<td style="text-align: right;">1.079</td>
+<td style="text-align: right;">1.687</td>
+<td style="text-align: right;">0.008</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">family_relationshipWorse</td>
+<td style="text-align: right;">1.350</td>
+<td style="text-align: right;">1.131</td>
+<td style="text-align: right;">1.610</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_relationshipWorse</td>
+<td style="text-align: right;">1.027</td>
+<td style="text-align: right;">0.867</td>
+<td style="text-align: right;">1.215</td>
+<td style="text-align: right;">0.758</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">physical_activity_groupedMore than 150min/week</td>
+<td style="text-align: right;">0.176</td>
+<td style="text-align: right;">0.081</td>
+<td style="text-align: right;">0.331</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sleep_qualityWorse</td>
+<td style="text-align: right;">3.114</td>
+<td style="text-align: right;">2.563</td>
+<td style="text-align: right;">3.808</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Social domain - third entry</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> _,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">weights =</span> combined_weight</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>statistic, <span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(estimate, conf.low, conf.high),</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                                exp)) <span class="sc">|&gt;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(p.value, <span class="at">.after =</span> dplyr<span class="sc">::</span><span class="fu">last_col</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(estimate, <span class="at">.before =</span> conf.low) <span class="sc">|&gt;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p_lt_01 =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">set_names</span>(</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Variable"</span>, <span class="st">"RR"</span>, <span class="st">"RR (lower)"</span>, <span class="st">"RR (upper)"</span>, <span class="st">"$p$-value"</span>, <span class="st">"$p&lt;0.1$"</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Weighted poisson regression with $p$-value</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="st">        $&lt;$ 0.2 in bivariate analysis in social domain - third entry."</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in social domain - third entry.</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span>-value</th>
+<th style="text-align: left;"><span class="math inline">\(p&lt;0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.670</td>
+<td style="text-align: right;">0.445</td>
+<td style="text-align: right;">1.021</td>
+<td style="text-align: right;">0.059</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age_2</td>
+<td style="text-align: right;">1.521</td>
+<td style="text-align: right;">1.016</td>
+<td style="text-align: right;">2.256</td>
+<td style="text-align: right;">0.039</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education_groupedSome college education</td>
+<td style="text-align: right;">0.569</td>
+<td style="text-align: right;">0.467</td>
+<td style="text-align: right;">0.693</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education_groupedMaster or Doctorate</td>
+<td style="text-align: right;">0.462</td>
+<td style="text-align: right;">0.373</td>
+<td style="text-align: right;">0.570</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gender_birthFemale</td>
+<td style="text-align: right;">2.300</td>
+<td style="text-align: right;">1.921</td>
+<td style="text-align: right;">2.759</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">heterosexualNo</td>
+<td style="text-align: right;">1.979</td>
+<td style="text-align: right;">1.616</td>
+<td style="text-align: right;">2.418</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">household_incomeMiddle</td>
+<td style="text-align: right;">1.495</td>
+<td style="text-align: right;">1.184</td>
+<td style="text-align: right;">1.867</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household_incomeUpper</td>
+<td style="text-align: right;">1.427</td>
+<td style="text-align: right;">1.136</td>
+<td style="text-align: right;">1.782</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">family_relationshipWorse</td>
+<td style="text-align: right;">1.467</td>
+<td style="text-align: right;">1.233</td>
+<td style="text-align: right;">1.745</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">physical_activity_groupedMore than 150min/week</td>
+<td style="text-align: right;">0.160</td>
+<td style="text-align: right;">0.073</td>
+<td style="text-align: right;">0.301</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sleep_qualityWorse</td>
+<td style="text-align: right;">2.967</td>
+<td style="text-align: right;">2.452</td>
+<td style="text-align: right;">3.614</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_people_house</td>
+<td style="text-align: right;">0.902</td>
+<td style="text-align: right;">0.852</td>
+<td style="text-align: right;">0.953</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clinical domain - fourth entry</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_loneliness <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        phq_total <span class="sc">+</span> gad_total <span class="sc">+</span> alcohol_risk <span class="sc">+</span> cannabis_use,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> _,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">weights =</span> combined_weight</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>statistic, <span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(estimate, conf.low, conf.high),</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                                exp)) <span class="sc">|&gt;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(p.value, <span class="at">.after =</span> dplyr<span class="sc">::</span><span class="fu">last_col</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(estimate, <span class="at">.before =</span> conf.low) <span class="sc">|&gt;</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p_lt_01 =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.1</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">set_names</span>(</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Variable"</span>, <span class="st">"RR"</span>, <span class="st">"RR (lower)"</span>, <span class="st">"RR (upper)"</span>, <span class="st">"$p$-value"</span>, <span class="st">"$p&lt;0.1$"</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Weighted poisson regression with $p$-value</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="st">        $&lt;$ 0.2 in bivariate analysis in clinical domain - fourth entry."</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in clinical domain - fourth entry.</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">RR</th>
+<th style="text-align: right;">RR (lower)</th>
+<th style="text-align: right;">RR (upper)</th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span>-value</th>
+<th style="text-align: left;"><span class="math inline">\(p&lt;0.1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.319</td>
+<td style="text-align: right;">0.202</td>
+<td style="text-align: right;">0.505</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age_2</td>
+<td style="text-align: right;">3.066</td>
+<td style="text-align: right;">1.967</td>
+<td style="text-align: right;">4.748</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education_groupedSome college education</td>
+<td style="text-align: right;">0.684</td>
+<td style="text-align: right;">0.551</td>
+<td style="text-align: right;">0.851</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education_groupedMaster or Doctorate</td>
+<td style="text-align: right;">0.705</td>
+<td style="text-align: right;">0.556</td>
+<td style="text-align: right;">0.893</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gender_birthFemale</td>
+<td style="text-align: right;">1.719</td>
+<td style="text-align: right;">1.393</td>
+<td style="text-align: right;">2.119</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">heterosexualNo</td>
+<td style="text-align: right;">1.518</td>
+<td style="text-align: right;">1.227</td>
+<td style="text-align: right;">1.872</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">household_incomeMiddle</td>
+<td style="text-align: right;">1.388</td>
+<td style="text-align: right;">1.094</td>
+<td style="text-align: right;">1.743</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household_incomeUpper</td>
+<td style="text-align: right;">1.361</td>
+<td style="text-align: right;">1.062</td>
+<td style="text-align: right;">1.735</td>
+<td style="text-align: right;">0.014</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">family_relationshipWorse</td>
+<td style="text-align: right;">1.370</td>
+<td style="text-align: right;">1.143</td>
+<td style="text-align: right;">1.641</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">physical_activity_groupedMore than 150min/week</td>
+<td style="text-align: right;">0.177</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.348</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sleep_qualityWorse</td>
+<td style="text-align: right;">2.071</td>
+<td style="text-align: right;">1.683</td>
+<td style="text-align: right;">2.563</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_people_house</td>
+<td style="text-align: right;">0.968</td>
+<td style="text-align: right;">0.913</td>
+<td style="text-align: right;">1.024</td>
+<td style="text-align: right;">0.262</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">phq_total</td>
+<td style="text-align: right;">1.214</td>
+<td style="text-align: right;">1.080</td>
+<td style="text-align: right;">1.366</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gad_total</td>
+<td style="text-align: right;">1.191</td>
+<td style="text-align: right;">1.049</td>
+<td style="text-align: right;">1.352</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">alcohol_riskHigh risk</td>
+<td style="text-align: right;">1.579</td>
+<td style="text-align: right;">1.322</td>
+<td style="text-align: right;">1.882</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cannabis_useYes</td>
+<td style="text-align: right;">1.750</td>
+<td style="text-align: right;">1.250</td>
+<td style="text-align: right;">2.399</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 <section id="final-model" class="level2">
 <h2 class="anchored" data-anchor-id="final-model">7.2. Final model</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>block_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>block_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    friend_relationship <span class="sc">+</span> physical_activity_grouped <span class="sc">+</span> sleep_quality,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>block_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>block_4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house <span class="sc">+</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    phq_total <span class="sc">+</span> gad_total <span class="sc">+</span> alcohol_risk <span class="sc">+</span> cannabis_use,</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>huxtable<span class="sc">::</span><span class="fu">huxreg</span>(</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">"Block 1: Sociodemographic"</span> <span class="ot">=</span> block_1,</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 2: Lifestyle"</span> <span class="ot">=</span> block_2,</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 3: Social"</span> <span class="ot">=</span> block_3,</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 4: Clinical"</span> <span class="ot">=</span> block_4),</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"[{conf.low},  {conf.high}], {dplyr::if_else(p.value &lt; 0.001, 'p&lt;0.001', paste0('p=', as.character(p.value)))}"</span>,</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_pos =</span> <span class="st">"same"</span>,</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_format =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">n =</span> <span class="st">"nobs"</span>,</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"-2log likelihood"</span> <span class="ot">=</span> <span class="st">"logLik"</span>,</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>                 <span class="at">AIC =</span> <span class="st">"AIC"</span>,</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">BIC =</span> <span class="st">"BIC"</span>),</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer_borders =</span> <span class="dv">1</span>,</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_args =</span> <span class="fu">list</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefs =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"(Intercept)"</span>,</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (z-score)"</span> <span class="ot">=</span> <span class="st">"age"</span>,</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (quadratic term)"</span> <span class="ot">=</span> <span class="st">"age_2"</span>,</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (college education)"</span> <span class="ot">=</span> <span class="st">"education_groupedSome college education"</span>,</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (master or PhD)"</span> <span class="ot">=</span> <span class="st">"education_groupedMaster or Doctorate"</span>,</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex (male)"</span> <span class="ot">=</span> <span class="st">"gender_birthFemale"</span>,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sexual orientation (non-heterosexual)"</span> <span class="ot">=</span> <span class="st">"heterosexualNo"</span>,</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (middle)"</span> <span class="ot">=</span> <span class="st">"household_incomeMiddle"</span>,</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Family relationship (bad or regular)"</span> <span class="ot">=</span> <span class="st">"family_relationshipWorse"</span>,</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Friendship relationship (bad or regular)"</span> <span class="ot">=</span> <span class="st">"friend_relationshipWorse"</span>,</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Physical activity (more than 150 min/week)"</span> <span class="ot">=</span> <span class="st">"physical_activity_groupedMore than 150min/week"</span>,</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sleep quality (bad or regular)"</span> <span class="ot">=</span> <span class="st">"sleep_qualityWorse"</span>,</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of people living in your house"</span> <span class="ot">=</span> <span class="st">"number_people_house"</span>,</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Depressive symptoms (PHQ-9)"</span> <span class="ot">=</span> <span class="st">"phq_total"</span>,</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Anxiety symptoms (GAD-7)"</span> <span class="ot">=</span> <span class="st">"gad_total"</span>,</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Alcohol risk zone (moderate, high or severe)"</span> <span class="ot">=</span> <span class="st">"alcohol_riskHigh risk"</span>,</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cannabis use (yes)"</span> <span class="ot">=</span> <span class="st">"cannabis_useYes"</span>)</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table id="tab:final-model" class="huxtable table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td>
+<td data-quarto-table-cell-role="th" style="text-align: center; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 1: Sociodemographic</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 2: Lifestyle</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 3: Social</td>
+<td data-quarto-table-cell-role="th" style="text-align: center; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 4: Clinical</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.175 [0.146, 0.209], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.074 [0.057, 0.094], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.102 [0.075, 0.139], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.085 [0.061, 0.117], p&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (z-score)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.387 [0.270, 0.558], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.681 [0.453, 1.033], p=0.067</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.670 [0.445, 1.021], p=0.059</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.319 [0.202, 0.505], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (quadratic term)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.652 [1.861, 3.743], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.568 [1.051, 2.316], p=0.026</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.521 [1.016, 2.256], p=0.039</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">3.066 [1.967, 4.748], p&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (college education)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.406 [0.335, 0.491], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.531 [0.438, 0.644], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.569 [0.467, 0.693], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.684 [0.551, 0.851], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (master or PhD)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.460 [0.375, 0.563], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.453 [0.366, 0.561], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.462 [0.373, 0.570], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.705 [0.556, 0.893], p=0.004</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sex (male)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.804 [2.386, 3.304], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.381 [1.984, 2.864], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.300 [1.921, 2.759], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.719 [1.393, 2.119], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sexual orientation (non-heterosexual)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.510 [2.087, 3.012], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.226 [1.840, 2.686], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.979 [1.616, 2.418], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.518 [1.227, 1.872], p&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (middle)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.298 [1.026, 1.625], p=0.026</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.456 [1.155, 1.817], p=0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.495 [1.184, 1.867], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.388 [1.094, 1.743], p=0.006</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (upper)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.171 [0.931, 1.466], p=0.173</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.353 [1.079, 1.687], p=0.008</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.427 [1.136, 1.782], p=0.002</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.361 [1.062, 1.735], p=0.014</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Family relationship (bad or regular)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.350 [1.131, 1.610], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.467 [1.233, 1.745], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.370 [1.143, 1.641], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Friendship relationship (bad or regular)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.027 [0.867, 1.215], p=0.758</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Physical activity (more than 150 min/week)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.176 [0.081, 0.331], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.160 [0.073, 0.301], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.177 [0.078, 0.348], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sleep quality (bad or regular)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">3.114 [2.563, 3.808], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.967 [2.452, 3.614], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.071 [1.683, 2.563], p&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Number of people living in your house</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.902 [0.852, 0.953], p&lt;0.001</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.968 [0.913, 1.024], p=0.262</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Depressive symptoms (PHQ-9)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.214 [1.080, 1.366], p=0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Anxiety symptoms (GAD-7)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.191 [1.049, 1.352], p=0.007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Alcohol risk zone (moderate, high or severe)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.579 [1.322, 1.882], p&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Cannabis use (yes)</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.750 [1.250, 2.399], p&lt;0.001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-2log likelihood</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1804.827</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1685.485</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1678.673</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1621.319</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3627.655</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3396.971</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3383.346</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3276.637</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: left; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BIC</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3665.086</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3451.039</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3437.415</td>
+<td style="text-align: right; vertical-align: top; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3347.342</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 </section>
 </section>
 <section id="session-information" class="level1">
@@ -1662,7 +2511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
@@ -1680,29 +2529,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version date (UTC) lib source
+ assertthat    0.2.1   2019-03-21 [1] CRAN (R 4.2.2)
  backports     1.4.1   2021-12-13 [1] CRAN (R 4.2.2)
  base64enc     0.1-3   2015-07-28 [1] CRAN (R 4.2.2)
  broom         1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
+ broom.mixed   0.2.9.4 2022-04-17 [1] CRAN (R 4.2.2)
  cli           3.6.1   2023-03-23 [1] CRAN (R 4.2.3)
+ codetools     0.2-19  2023-02-01 [2] CRAN (R 4.3.2)
+ commonmark    1.9.0   2023-03-17 [1] CRAN (R 4.2.3)
+ crayon        1.5.2   2022-09-29 [1] CRAN (R 4.2.2)
  digest        0.6.33  2023-07-07 [1] CRAN (R 4.3.1)
  dplyr         1.1.4   2023-11-17 [1] CRAN (R 4.3.2)
+ ellipsis      0.3.2   2021-04-29 [1] CRAN (R 4.2.2)
  evaluate      0.23    2023-11-01 [1] CRAN (R 4.3.2)
  fansi         1.0.5   2023-10-08 [1] CRAN (R 4.3.1)
  fastmap       1.1.1   2023-02-24 [1] CRAN (R 4.2.2)
  forcats       1.0.0   2023-01-29 [1] CRAN (R 4.2.2)
+ furrr         0.3.1   2022-08-15 [1] CRAN (R 4.2.2)
+ future        1.33.0  2023-07-01 [1] CRAN (R 4.3.1)
  generics      0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
+ globals       0.16.2  2022-11-21 [1] CRAN (R 4.2.2)
  glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.2)
  haven         2.5.3   2023-06-30 [1] CRAN (R 4.3.1)
  hms           1.1.3   2023-03-21 [1] CRAN (R 4.2.3)
  htmltools     0.5.7   2023-11-03 [1] CRAN (R 4.3.2)
  htmlwidgets   1.6.2   2023-03-17 [1] CRAN (R 4.2.3)
+ huxtable      5.5.2   2022-12-16 [1] CRAN (R 4.3.0)
  janitor       2.2.0   2023-02-02 [1] CRAN (R 4.2.2)
  jsonlite      1.8.7   2023-06-29 [1] CRAN (R 4.3.1)
  knitr         1.45    2023-10-30 [1] CRAN (R 4.3.1)
+ lattice       0.22-5  2023-10-24 [2] CRAN (R 4.3.2)
  lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.3.2)
+ listenv       0.9.0   2022-12-16 [1] CRAN (R 4.2.2)
  lubridate     1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
  magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
  MASS          7.3-60  2023-05-04 [1] CRAN (R 4.3.0)
+ nlme          3.1-163 2023-08-09 [1] CRAN (R 4.3.1)
+ parallelly    1.36.0  2023-05-26 [1] CRAN (R 4.3.0)
  pillar        1.9.0   2023-03-22 [1] CRAN (R 4.2.3)
  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
  purrr         1.0.2   2023-08-10 [1] CRAN (R 4.3.1)
