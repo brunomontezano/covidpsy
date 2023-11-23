@@ -1,0 +1,181 @@
+---
+title: "Lifestyle as a predictor of loneliness: a longitudinal study"
+subtitle: "Data analysis code"
+author:
+  - name: Bruno Braga Montezano
+    id: bm
+    orcid: 0000-0002-4627-1776
+    email: bmontezano@hcpa.edu.br
+    affiliation: 
+      - name: Federal University of Rio Grande do Sul
+        city: Porto Alegre
+        state: RS
+        url: https://www.ufrgs.br/ppgpsiquiatria/
+license: "CC BY"
+copyright: 
+  holder: Bruno Braga Montezano
+  year: 2023
+date: today
+lang: en
+theme: journal
+format:
+  html:
+    code-fold: true
+---
+
+# 1. Load the data
+
+```{r load-data}
+df <- haven::read_sav("./data/covidpsy_weighted.sav") |>
+    janitor::clean_names() |>
+    haven::as_factor()
+```
+
+First, we used the `read_sav` function from the `haven` package to load the
+dataset. The original data has `r nrow(df)` rows and `r ncol(df)` columns.
+Although, in the next step we will filter the data with subjects that present
+valid values for UCLA (UCLA Loneliness Scale 3-item version) in the first and
+fourth waves and evaluate just those that did not have loneliness at baseline
+(W1).  We will also select only the variables to be used on the data routines.
+The `clean_names` function from the `janitor` package was used to clean the
+variable names in order to facilitate data manipulation later on.
+
+
+# 2. Select variables of interest and filter the data
+
+```{r select-variables}
+df_loneliness <- df |> dplyr::select(
+    ucla_total,
+    ucla_total_w4,
+    gender_birth,
+    heterossexual,
+    color,
+    year_birth,
+    education,
+    education_grouped,
+    household_income,
+    number_people_house,
+    unemployed,
+    social_distancing,
+    phq_total,
+    gad_total,
+    classif_audit,
+    marijuana_frequency,
+    physical_activity_dichotomized,
+    physical_activity_grouped,
+    sleep_quality,
+    marital_status_grouped,
+    friend_relationship,
+    family_relationship,
+    religion,
+    sampling_weight,
+    ipw_w4
+) |>
+    dplyr::filter(
+        !is.na(ucla_total),
+        !is.na(ucla_total_w4)
+    )
+```
+
+In this step, we selected `r ncol(df_loneliness)` variables. They are the
+following: UCLA total score on W1 (`ucla_total`), UCLA total score on W4
+(`ucla_total_w4`), gender at birth (`gender_birth`), heterossexual
+(`heterossexual`), skin color (`color`), birth year (`year_birth`), seven
+categories of education (`education`), three categories of education
+(`education_grouped`), five levels of household income (`household_income`),
+number of people in your house including you (`number_people_house`),
+unemployment (`unemployed`), social distancing (`social_distancing`), PHQ-9
+total score at W1 (`phq_total`), GAD-7 total score at W1 (`gad_total`), AUDIT
+risk [4 categories] (`classif_audit`), cannabis use frequency
+(`marijuana_frequency`), physical activity [binary variable]
+(`physical_acitivty_dichotomized`), physical activity [more or less than
+150min/week] (`physical_activity_grouped`), sleep quality [four categories]
+(`sleep_quality`), marital status [with or without partner]
+(`marital_status_grouped`), friend relationship quality
+(`friend_relationship`), family relationship quality (`family_relationship`),
+has a religion (`religion`), sampling weight for demographics
+(`sampling_weight`), weight for attrition at W4 (`ipw_w4`).
+
+After the removal of subjects with missing values on UCLA at W1 or W4, we
+ended up with a dataset of `r nrow(df_loneliness)` subjects.
+
+```{r retain-only-without-loneliness-at-w1}
+df_loneliness <- df_loneliness |>
+    dplyr::filter(ucla_total < 6)
+```
+
+After removing the subjects with loneliness (UCLA $\geq$ 6) at baseline (W1),
+there were `r nrow(df_loneliness)` participants remaining.
+
+# 3. Exploratory data analysis
+
+## 3.1. Skim the data
+
+```{r skim-the-data}
+skimr::skim(df_loneliness)
+```
+
+# 4. Feature engineering
+
+In this section, we are going to modify variables and create some new ones in
+order to facilitate the data analysis. We'll go through the following steps:
+
+1. Create an `outcome` variable based on UCLA total score at W4. Scores $\geq$
+   6 will be positive (`1`) and values $<$ 6 will be negative (`0`).
+2. Build an `age` variable based on `year_birth`.
+3. Create quadratic and cubic terms (variables) for age (i.e. `age_2` and
+   `age_3`).
+4. Build a `combined_weight` variable that is the product of `sampling_weight`
+   and `ipw_w4` to weight analysis for both demographics and attrition.
+5. Standardize PHQ-9 (`phq_total`) and GAD-7 (`gad_total`) scores with
+   $z$-scores to facilitate the interpretability of the coefficients.
+6. Dichotomize skin color variable (`color`) in white and non-white subjects.
+7. Dichotomize the AUDIT risk variable (`classif_audit`) into two levels: low
+   risk and moderate/high/severe risk.
+8. Dichotomize cannabis use variable (`marijuana frequency`) into "uses
+   cannabis" and "does not use cannabis".
+9. Dichotomize the variables of quality of family relationships
+   (`family_relationship`), quality of friendship relationships
+   (`friend_relationship`), and sleep quality (`sleep_quality`) into two levels:
+   Bad/Fair and Good/Excellent.
+10. Categorize the household income variable (`household_income`) into three
+   levels of socioeconomic status: A/B (upper), C (middle) and D/E (lower).
+11. Recode all variables to easy and interpretable category labels.
+12. Remove the following variables: `education`,
+    `physical_activity_dichotomized`, `ucla_total`,
+    `ucla_total_w4`, `year_birth`.
+13. Relocate the variables (*not necessary* per se).
+
+```{r feature-eng}
+df_loneliness |>
+    dplyr::mutate(
+        # Step 1: Outcome variable based on UCLA score at W4
+        outcome = as.factor(dplyr::if_else(ucla_total_w4 >= 6, "Yes", "No")),
+        # Step 2: Age variable based on `year_birth`
+        age = 2023 - year_birth,
+        # Step 3: Create quadratic and cubic terms for age
+        age_2 = age ^ 2,
+        age_3 = age ^ 3,
+        # Step 4: Build combined weight variable
+        combined_weight = sampling_weight * ipw_w4,
+        # Step 5: Standardize PHQ-9 and GAD-7 scores
+        dplyr::across(
+            dplyr::matches("^(phq|gad)_total$"),
+            \(x) (x - mean(x)) / sd(x)
+        ),
+        # Step 6: Dichotomize skin color in white/non-white subjects
+        color = dplyr::case_match(color,
+            "Branca" ~ "White",
+            c("Parda", "Preta", "Amarela", "Indigena") ~ "Non-white"
+        ),
+        # Step 7: Dichotomize AUDIT risk score
+        classif_audit = classif_audit
+    )
+    
+```
+
+# Session information
+
+```{r session-info}
+sessionInfo()
+```
