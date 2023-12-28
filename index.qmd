@@ -858,7 +858,7 @@ huxtable::huxreg(
     "Age (quadratic term)" = "age_2",
     "Education (college education)" = "education_groupedSome college education",
     "Education (master or PhD)" = "education_groupedMaster or Doctorate",
-    "Sex (male)" = "gender_birthFemale",
+    "Sex (female)" = "gender_birthFemale",
     "Sexual orientation (non-heterosexual)" = "heterosexualNo",
     "Socioeconomic status (middle)" = "household_incomeMiddle",
     "Socioeconomic status (upper)" = "household_incomeUpper",
