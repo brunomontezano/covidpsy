@@ -268,9 +268,11 @@ df_loneliness |>
 
 ## 5.2. Weighted descriptive tables
 
-In this section we will create two tables: the first, weighted from
-demographics (using `sampling_weight`), and the second weighted based on the
-attrition (`ipw_w4`) associated with the fourth wave (W4).
+In this section we will create three tables: the first, weighted from
+demographics (using `sampling_weight`), the second weighted based on the
+attrition (`ipw_w4`) associated with the fourth wave (W4), and the third
+based on the combined weight from demographics and also attrition
+(`sampling_weight * ipw_w4`).
 
 ```{r descriptive-analysis-demographic-weight}
 #| warning: false
@@ -378,6 +380,60 @@ df_loneliness |>
     ) |>
     gtsummary::modify_caption("Descriptive table stratified by loneliness
                               incidence, weighted by attrition.")
+```
+
+```{r descriptive-analysis-combined-weight}
+#| warning: false
+df_loneliness |>
+    dplyr::select(-c(ipw_w4, age, age_2, age_3, sampling_weight)) |>
+    dplyr::mutate(outcome = dplyr::if_else(outcome == 1, "Yes", "No")) |>
+    survey::svydesign(
+        ~ 1,
+        data = _,
+        weights = ~ combined_weight) |>
+    gtsummary::tbl_svysummary(
+        by = outcome,
+        include = -c(combined_weight),
+        digits = list(
+            gtsummary::all_categorical() ~ c(0, 1, 1),
+            gtsummary::all_continuous() ~ 2
+        ),
+        statistic = list(
+            gtsummary::all_categorical() ~ "{n_unweighted} ({p_unweighted}%/{p}%)"
+        ),
+        label = list(
+            gender_birth ~ "Sex",
+            heterosexual ~ "Sexual orientation (heterosexual)",
+            color ~ "Skin color",
+            education_grouped ~ "Education",
+            household_income ~ "Socioeconomic status",
+            number_people_house ~ "Number of people in your house (including you)",
+            unemployed ~ "Unemployed",
+            social_distancing ~ "Social distancing",
+            phq_total ~ "Depressive symptoms (PHQ-9)",
+            gad_total ~ "Anxiety symptoms (GAD-7)",
+            physical_activity_grouped ~ "Physical activity",
+            sleep_quality ~ "Sleep quality",
+            marital_status_grouped ~ "Marital status (grouped)",
+            friend_relationship ~ "Friendship relationship quality",
+            family_relationship ~ "Family relationship quality",
+            religion ~ "Religion",
+            age_raw ~ "Age (in years)",
+            alcohol_risk ~ "Alcohol risk zone",
+            cannabis_use ~ "Cannabis use"
+        )
+    ) |>
+    gtsummary::add_overall(last = TRUE) |>
+    gtsummary::add_p() |>
+    gtsummary::modify_header(
+        label = '**Characteristic**',
+        stat_1 = '**No**, *n* = 348',
+        stat_2 = '**Yes**, *n* = 125',
+        stat_0 = '**Overall**, *n* = 473',
+        p.value = '***p*-value**'
+    ) |>
+    gtsummary::modify_caption("Descriptive table stratified by loneliness
+                              incidence, weighted by the combined weight.")
 ```
 
 # 6. Bivariate analysis
