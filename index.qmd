@@ -195,7 +195,7 @@ df_loneliness <- df_loneliness |>
                 as.character(x),
                 c("Ruim", "Ruins", "Regular", "Regulares") ~ "Worse",
                 c("Bom", "Bons", "Excelente", "Excelentes") ~ "Better"
-            ))
+    ) |> forcats::fct_rev())
         ),
         # Step 10: Create three levels of socioeconomic status
         household_income = as.factor(dplyr::case_match(
@@ -860,6 +860,7 @@ df_loneliness |>
 ## 7.2. Final model
 
 ```{r final-model}
+# Block 1: sociodemographic
 block_1 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
     heterosexual + household_income,
     data = df_loneliness,
@@ -867,23 +868,18 @@ block_1 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
     weights = combined_weight
 )
 
+# Block 2: Lifestyle and social
 block_2 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
     heterosexual + household_income + family_relationship +
-    friend_relationship + physical_activity_grouped + sleep_quality,
+    friend_relationship + physical_activity_grouped + sleep_quality +
+    number_people_house,
     data = df_loneliness,
     family = poisson(link = "log"),
     weights = combined_weight
 )
 
+# Block 3: Clinical
 block_3 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-    heterosexual + household_income + family_relationship +
-    physical_activity_grouped + sleep_quality + number_people_house,
-    data = df_loneliness,
-    family = poisson(link = "log"),
-    weights = combined_weight
-)
-
-block_4 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
     heterosexual + household_income + family_relationship +
     physical_activity_grouped + sleep_quality + number_people_house +
     phq_total + gad_total + alcohol_risk + cannabis_use,
@@ -894,9 +890,8 @@ block_4 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
 
 huxtable::huxreg(
   list("Block 1: Sociodemographic" = block_1,
-       "Block 2: Lifestyle" = block_2,
-       "Block 3: Social" = block_3,
-       "Block 4: Clinical" = block_4),
+       "Block 2: Lifestyle and social" = block_2,
+       "Block 3: Clinical" = block_3),
   stars = NULL,
   error_format = "[{conf.low},  {conf.high}], {dplyr::if_else(p.value < 0.001, 'p<0.001', paste0('p=', as.character(p.value)))}",
   error_pos = "same",
@@ -919,10 +914,10 @@ huxtable::huxreg(
     "Socioeconomic status (middle)" = "household_incomeMiddle",
     "Socioeconomic status (upper)" = "household_incomeUpper",
     "Socioeconomic status (upper)" = "household_incomeUpper",
-    "Family relationship (bad or regular)" = "family_relationshipWorse",
-    "Friendship relationship (bad or regular)" = "friend_relationshipWorse",
+    "Positive family relationship" = "family_relationshipBetter",
+    "Positive friendship relationship" = "friend_relationshipBetter",
     "Physical activity (more than 150 min/week)" = "physical_activity_groupedMore than 150min/week",
-    "Sleep quality (bad or regular)" = "sleep_qualityWorse",
+    "Good sleep quality" = "sleep_qualityBetter",
     "Number of people living in your house" = "number_people_house",
     "Depressive symptoms (PHQ-9)" = "phq_total",
     "Anxiety symptoms (GAD-7)" = "gad_total",
@@ -932,6 +927,76 @@ huxtable::huxreg(
     huxtable::set_caption("Multi-predictor Poisson regression analysis to
         evaluate factors associated with loneliness incidence. The table
         presents the risk ratios and the corresponding 95% CIs with p-values.")
+```
+
+## 7.3. Odds ratio plot
+
+### 7.3.1. With sort
+
+```{r or-plot-sorted}
+or_plot <- plot(parameters::parameters(
+        block_3,
+        exponentiate = TRUE
+        ), show_labels = TRUE, size_text = 6, size_point = 1.2, sort = "descending") +
+     ggplot2::scale_y_discrete(labels = c(
+     "Physical activity [More than 150min/week]",
+     "Age",
+     "Sleep quality [Better]",
+     "Education [Some college education]",
+     "Education [Master or Doctorate]",
+     "Family relationship [Better]",
+     "Number of people living in your house",
+     "Anxiety symptoms [GAD-7]",
+     "Depressive symptoms [PHQ-9]",
+     "Household income [Upper]",
+     "Household income [Middle]",
+     "Heterosexual [No]",
+     "Alcohol risk [High risk]",
+     "Gender birth [Female]",
+     "Cannabis use [Yes]",
+     "Age (quadratic term)")
+     ) +
+    ggplot2::labs(x = "RR") +
+    ggplot2::theme(
+        axis.text = ggplot2::element_text(size = 18, color = "black"),
+        axis.title = ggplot2::element_text(size = 18, color = "black")
+    )
+
+ggplot2::ggsave(filename = "~/tmp/or_plot_loneliness_sorted.png", or_plot,
+dpi = 300, width = 16, height = 10)
+```
+
+```{r or-plot-unsorted}
+or_plot <- plot(parameters::parameters(
+        block_3,
+        exponentiate = TRUE
+        ), show_labels = TRUE, size_text = 6, size_point = 1.2) +
+     ggplot2::scale_y_discrete(labels = c(
+     "Cannabis use [Yes]",
+     "Alcohol risk [High risk]",
+     "Anxiety symptoms [GAD-7]",
+     "Depressive symptoms [PHQ-9]",
+     "Number of people living in your house",
+     "Sleep quality [Better]",
+     "Physical activity [More than 150min/week]",
+     "Family relationship [Better]",
+     "Household income [Upper]",
+     "Household income [Middle]",
+     "Heterosexual [No]",
+     "Gender birth [Female]",
+     "Education [Master or Doctorate]",
+     "Education [Some college education]",
+     "Age (quadratic term)",
+     "Age")
+     ) +
+    ggplot2::labs(x = "RR") +
+    ggplot2::theme(
+        axis.text = ggplot2::element_text(size = 18, color = "black"),
+        axis.title = ggplot2::element_text(size = 18, color = "black")
+    )
+
+ggplot2::ggsave(filename = "~/tmp/or_plot_loneliness_unsorted.png", or_plot,
+dpi = 300, width = 16, height = 10)
 ```
 
 # Session information

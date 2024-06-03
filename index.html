@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.542">
+<meta name="generator" content="quarto-1.5.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Bruno Braga Montezano">
-<meta name="dcterms.date" content="2024-01-13">
+<meta name="dcterms.date" content="2024-06-03">
 
 <title>Lifestyle as a predictor of loneliness: a longitudinal study</title>
 <style>
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -137,7 +137,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 13, 2024</p>
+      <p class="date">June 3, 2024</p>
     </div>
   </div>
   
@@ -221,7 +221,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df_loneliness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
@@ -263,7 +263,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p><strong>Variable type: factor</strong></p>
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 28%">
 <col style="width: 9%">
@@ -422,7 +422,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 9%">
@@ -627,7 +627,7 @@ window.Quarto = {
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>                <span class="fu">as.character</span>(x),</span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"Ruim"</span>, <span class="st">"Ruins"</span>, <span class="st">"Regular"</span>, <span class="st">"Regulares"</span>) <span class="sc">~</span> <span class="st">"Worse"</span>,</span>
 <span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">"Bom"</span>, <span class="st">"Bons"</span>, <span class="st">"Excelente"</span>, <span class="st">"Excelentes"</span>) <span class="sc">~</span> <span class="st">"Better"</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>            ))</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>())</span>
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        ),</span>
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 10: Create three levels of socioeconomic status</span></span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">household_income =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
@@ -680,7 +680,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df_loneliness, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 2%">
 <col style="width: 3%">
@@ -1112,23 +1112,23 @@ window.Quarto = {
 <span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="st">                              incidence, weighted by demographics."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="mjjnxveusy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mjjnxveusy table {
+<div id="bkttmxmper" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bkttmxmper table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mjjnxveusy thead, #mjjnxveusy tbody, #mjjnxveusy tfoot, #mjjnxveusy tr, #mjjnxveusy td, #mjjnxveusy th {
+#bkttmxmper thead, #bkttmxmper tbody, #bkttmxmper tfoot, #bkttmxmper tr, #bkttmxmper td, #bkttmxmper th {
   border-style: none;
 }
 
-#mjjnxveusy p {
+#bkttmxmper p {
   margin: 0;
   padding: 0;
 }
 
-#mjjnxveusy .gt_table {
+#bkttmxmper .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1154,12 +1154,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_caption {
+#bkttmxmper .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mjjnxveusy .gt_title {
+#bkttmxmper .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1171,7 +1171,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mjjnxveusy .gt_subtitle {
+#bkttmxmper .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1183,7 +1183,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mjjnxveusy .gt_heading {
+#bkttmxmper .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1195,13 +1195,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_bottom_border {
+#bkttmxmper .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_col_headings {
+#bkttmxmper .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1216,7 +1216,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_col_heading {
+#bkttmxmper .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1236,7 +1236,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mjjnxveusy .gt_column_spanner_outer {
+#bkttmxmper .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1248,15 +1248,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mjjnxveusy .gt_column_spanner_outer:first-child {
+#bkttmxmper .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mjjnxveusy .gt_column_spanner_outer:last-child {
+#bkttmxmper .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mjjnxveusy .gt_column_spanner {
+#bkttmxmper .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1268,11 +1268,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mjjnxveusy .gt_spanner_row {
+#bkttmxmper .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mjjnxveusy .gt_group_heading {
+#bkttmxmper .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1298,7 +1298,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mjjnxveusy .gt_empty_group_heading {
+#bkttmxmper .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1313,15 +1313,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mjjnxveusy .gt_from_md > :first-child {
+#bkttmxmper .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mjjnxveusy .gt_from_md > :last-child {
+#bkttmxmper .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mjjnxveusy .gt_row {
+#bkttmxmper .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1340,7 +1340,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mjjnxveusy .gt_stub {
+#bkttmxmper .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1353,7 +1353,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mjjnxveusy .gt_stub_row_group {
+#bkttmxmper .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1367,15 +1367,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mjjnxveusy .gt_row_group_first td {
+#bkttmxmper .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mjjnxveusy .gt_row_group_first th {
+#bkttmxmper .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mjjnxveusy .gt_summary_row {
+#bkttmxmper .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1385,16 +1385,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mjjnxveusy .gt_first_summary_row {
+#bkttmxmper .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_first_summary_row.thick {
+#bkttmxmper .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mjjnxveusy .gt_last_summary_row {
+#bkttmxmper .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1404,7 +1404,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_grand_summary_row {
+#bkttmxmper .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1414,7 +1414,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mjjnxveusy .gt_first_grand_summary_row {
+#bkttmxmper .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1424,7 +1424,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_last_grand_summary_row_top {
+#bkttmxmper .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,11 +1434,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_striped {
+#bkttmxmper .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mjjnxveusy .gt_table_body {
+#bkttmxmper .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1447,7 +1447,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_footnotes {
+#bkttmxmper .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1461,7 +1461,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_footnote {
+#bkttmxmper .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1470,7 +1470,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mjjnxveusy .gt_sourcenotes {
+#bkttmxmper .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1484,7 +1484,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mjjnxveusy .gt_sourcenote {
+#bkttmxmper .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1492,68 +1492,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mjjnxveusy .gt_left {
+#bkttmxmper .gt_left {
   text-align: left;
 }
 
-#mjjnxveusy .gt_center {
+#bkttmxmper .gt_center {
   text-align: center;
 }
 
-#mjjnxveusy .gt_right {
+#bkttmxmper .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mjjnxveusy .gt_font_normal {
+#bkttmxmper .gt_font_normal {
   font-weight: normal;
 }
 
-#mjjnxveusy .gt_font_bold {
+#bkttmxmper .gt_font_bold {
   font-weight: bold;
 }
 
-#mjjnxveusy .gt_font_italic {
+#bkttmxmper .gt_font_italic {
   font-style: italic;
 }
 
-#mjjnxveusy .gt_super {
+#bkttmxmper .gt_super {
   font-size: 65%;
 }
 
-#mjjnxveusy .gt_footnote_marks {
+#bkttmxmper .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mjjnxveusy .gt_asterisk {
+#bkttmxmper .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mjjnxveusy .gt_indent_1 {
+#bkttmxmper .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mjjnxveusy .gt_indent_2 {
+#bkttmxmper .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mjjnxveusy .gt_indent_3 {
+#bkttmxmper .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mjjnxveusy .gt_indent_4 {
+#bkttmxmper .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mjjnxveusy .gt_indent_5 {
+#bkttmxmper .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <caption>Descriptive table stratified by loneliness incidence, weighted by demographics.</caption>
 <colgroup>
 <col style="width: 20%">
@@ -1771,18 +1771,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.003</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">163 (46.8%/51.2%)</td>
-<td class="gt_row gt_center" headers="stat_2">41 (32.8%/18.9%)</td>
-<td class="gt_row gt_center" headers="stat_0">204 (43.1%/42.9%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">185 (53.2%/48.8%)</td>
 <td class="gt_row gt_center" headers="stat_2">84 (67.2%/81.1%)</td>
 <td class="gt_row gt_center" headers="stat_0">269 (56.9%/57.1%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">163 (46.8%/51.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">41 (32.8%/18.9%)</td>
+<td class="gt_row gt_center" headers="stat_0">204 (43.1%/42.9%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1823,18 +1823,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.4</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">231 (66.4%/66.2%)</td>
-<td class="gt_row gt_center" headers="stat_2">72 (57.6%/55.1%)</td>
-<td class="gt_row gt_center" headers="stat_0">303 (64.1%/63.3%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">117 (33.6%/33.8%)</td>
 <td class="gt_row gt_center" headers="stat_2">53 (42.4%/44.9%)</td>
 <td class="gt_row gt_center" headers="stat_0">170 (35.9%/36.7%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">231 (66.4%/66.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">72 (57.6%/55.1%)</td>
+<td class="gt_row gt_center" headers="stat_0">303 (64.1%/63.3%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1849,18 +1849,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.3</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">263 (75.6%/78.3%)</td>
-<td class="gt_row gt_center" headers="stat_2">79 (63.2%/65.9%)</td>
-<td class="gt_row gt_center" headers="stat_0">342 (72.3%/75.2%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">85 (24.4%/21.7%)</td>
 <td class="gt_row gt_center" headers="stat_2">46 (36.8%/34.1%)</td>
 <td class="gt_row gt_center" headers="stat_0">131 (27.7%/24.8%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">263 (75.6%/78.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">79 (63.2%/65.9%)</td>
+<td class="gt_row gt_center" headers="stat_0">342 (72.3%/75.2%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1980,23 +1980,23 @@ window.Quarto = {
 <span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="st">                              incidence, weighted by attrition."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fnhrgfmqwb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fnhrgfmqwb table {
+<div id="bhyuswiotr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bhyuswiotr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fnhrgfmqwb thead, #fnhrgfmqwb tbody, #fnhrgfmqwb tfoot, #fnhrgfmqwb tr, #fnhrgfmqwb td, #fnhrgfmqwb th {
+#bhyuswiotr thead, #bhyuswiotr tbody, #bhyuswiotr tfoot, #bhyuswiotr tr, #bhyuswiotr td, #bhyuswiotr th {
   border-style: none;
 }
 
-#fnhrgfmqwb p {
+#bhyuswiotr p {
   margin: 0;
   padding: 0;
 }
 
-#fnhrgfmqwb .gt_table {
+#bhyuswiotr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2022,12 +2022,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_caption {
+#bhyuswiotr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fnhrgfmqwb .gt_title {
+#bhyuswiotr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2039,7 +2039,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#fnhrgfmqwb .gt_subtitle {
+#bhyuswiotr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2051,7 +2051,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#fnhrgfmqwb .gt_heading {
+#bhyuswiotr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2063,13 +2063,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_bottom_border {
+#bhyuswiotr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_col_headings {
+#bhyuswiotr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2084,7 +2084,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_col_heading {
+#bhyuswiotr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2104,7 +2104,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fnhrgfmqwb .gt_column_spanner_outer {
+#bhyuswiotr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2116,15 +2116,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#fnhrgfmqwb .gt_column_spanner_outer:first-child {
+#bhyuswiotr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fnhrgfmqwb .gt_column_spanner_outer:last-child {
+#bhyuswiotr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fnhrgfmqwb .gt_column_spanner {
+#bhyuswiotr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2136,11 +2136,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#fnhrgfmqwb .gt_spanner_row {
+#bhyuswiotr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fnhrgfmqwb .gt_group_heading {
+#bhyuswiotr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2166,7 +2166,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#fnhrgfmqwb .gt_empty_group_heading {
+#bhyuswiotr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2181,15 +2181,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#fnhrgfmqwb .gt_from_md > :first-child {
+#bhyuswiotr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fnhrgfmqwb .gt_from_md > :last-child {
+#bhyuswiotr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fnhrgfmqwb .gt_row {
+#bhyuswiotr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2208,7 +2208,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fnhrgfmqwb .gt_stub {
+#bhyuswiotr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2221,7 +2221,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhrgfmqwb .gt_stub_row_group {
+#bhyuswiotr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2235,15 +2235,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#fnhrgfmqwb .gt_row_group_first td {
+#bhyuswiotr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fnhrgfmqwb .gt_row_group_first th {
+#bhyuswiotr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fnhrgfmqwb .gt_summary_row {
+#bhyuswiotr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2253,16 +2253,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhrgfmqwb .gt_first_summary_row {
+#bhyuswiotr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_first_summary_row.thick {
+#bhyuswiotr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fnhrgfmqwb .gt_last_summary_row {
+#bhyuswiotr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2272,7 +2272,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_grand_summary_row {
+#bhyuswiotr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2282,7 +2282,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhrgfmqwb .gt_first_grand_summary_row {
+#bhyuswiotr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2292,7 +2292,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_last_grand_summary_row_top {
+#bhyuswiotr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2302,11 +2302,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_striped {
+#bhyuswiotr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fnhrgfmqwb .gt_table_body {
+#bhyuswiotr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2315,7 +2315,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_footnotes {
+#bhyuswiotr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2329,7 +2329,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_footnote {
+#bhyuswiotr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2338,7 +2338,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhrgfmqwb .gt_sourcenotes {
+#bhyuswiotr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2352,7 +2352,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fnhrgfmqwb .gt_sourcenote {
+#bhyuswiotr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2360,68 +2360,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fnhrgfmqwb .gt_left {
+#bhyuswiotr .gt_left {
   text-align: left;
 }
 
-#fnhrgfmqwb .gt_center {
+#bhyuswiotr .gt_center {
   text-align: center;
 }
 
-#fnhrgfmqwb .gt_right {
+#bhyuswiotr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fnhrgfmqwb .gt_font_normal {
+#bhyuswiotr .gt_font_normal {
   font-weight: normal;
 }
 
-#fnhrgfmqwb .gt_font_bold {
+#bhyuswiotr .gt_font_bold {
   font-weight: bold;
 }
 
-#fnhrgfmqwb .gt_font_italic {
+#bhyuswiotr .gt_font_italic {
   font-style: italic;
 }
 
-#fnhrgfmqwb .gt_super {
+#bhyuswiotr .gt_super {
   font-size: 65%;
 }
 
-#fnhrgfmqwb .gt_footnote_marks {
+#bhyuswiotr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fnhrgfmqwb .gt_asterisk {
+#bhyuswiotr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fnhrgfmqwb .gt_indent_1 {
+#bhyuswiotr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fnhrgfmqwb .gt_indent_2 {
+#bhyuswiotr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fnhrgfmqwb .gt_indent_3 {
+#bhyuswiotr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fnhrgfmqwb .gt_indent_4 {
+#bhyuswiotr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fnhrgfmqwb .gt_indent_5 {
+#bhyuswiotr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <caption>Descriptive table stratified by loneliness incidence, weighted by attrition.</caption>
 <colgroup>
 <col style="width: 20%">
@@ -2639,18 +2639,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.003</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">163 (46.8%/45.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">41 (32.8%/29.6%)</td>
-<td class="gt_row gt_center" headers="stat_0">204 (43.1%/41.4%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">185 (53.2%/54.3%)</td>
 <td class="gt_row gt_center" headers="stat_2">84 (67.2%/70.4%)</td>
 <td class="gt_row gt_center" headers="stat_0">269 (56.9%/58.6%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">163 (46.8%/45.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">41 (32.8%/29.6%)</td>
+<td class="gt_row gt_center" headers="stat_0">204 (43.1%/41.4%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -2691,18 +2691,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.11</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">231 (66.4%/65.2%)</td>
-<td class="gt_row gt_center" headers="stat_2">72 (57.6%/56.4%)</td>
-<td class="gt_row gt_center" headers="stat_0">303 (64.1%/62.8%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">117 (33.6%/34.8%)</td>
 <td class="gt_row gt_center" headers="stat_2">53 (42.4%/43.6%)</td>
 <td class="gt_row gt_center" headers="stat_0">170 (35.9%/37.2%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">231 (66.4%/65.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">72 (57.6%/56.4%)</td>
+<td class="gt_row gt_center" headers="stat_0">303 (64.1%/62.8%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -2717,18 +2717,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.013</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">263 (75.6%/74.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">79 (63.2%/61.0%)</td>
-<td class="gt_row gt_center" headers="stat_0">342 (72.3%/70.5%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">85 (24.4%/26.0%)</td>
 <td class="gt_row gt_center" headers="stat_2">46 (36.8%/39.0%)</td>
 <td class="gt_row gt_center" headers="stat_0">131 (27.7%/29.5%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">263 (75.6%/74.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">79 (63.2%/61.0%)</td>
+<td class="gt_row gt_center" headers="stat_0">342 (72.3%/70.5%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -2848,23 +2848,23 @@ window.Quarto = {
 <span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="st">                              incidence, weighted by the combined weight."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="twkszotchw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#twkszotchw table {
+<div id="ppockowuua" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ppockowuua table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#twkszotchw thead, #twkszotchw tbody, #twkszotchw tfoot, #twkszotchw tr, #twkszotchw td, #twkszotchw th {
+#ppockowuua thead, #ppockowuua tbody, #ppockowuua tfoot, #ppockowuua tr, #ppockowuua td, #ppockowuua th {
   border-style: none;
 }
 
-#twkszotchw p {
+#ppockowuua p {
   margin: 0;
   padding: 0;
 }
 
-#twkszotchw .gt_table {
+#ppockowuua .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2890,12 +2890,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#twkszotchw .gt_caption {
+#ppockowuua .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#twkszotchw .gt_title {
+#ppockowuua .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2907,7 +2907,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#twkszotchw .gt_subtitle {
+#ppockowuua .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2919,7 +2919,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#twkszotchw .gt_heading {
+#ppockowuua .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2931,13 +2931,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twkszotchw .gt_bottom_border {
+#ppockowuua .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#twkszotchw .gt_col_headings {
+#ppockowuua .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2952,7 +2952,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twkszotchw .gt_col_heading {
+#ppockowuua .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2972,7 +2972,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#twkszotchw .gt_column_spanner_outer {
+#ppockowuua .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2984,15 +2984,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#twkszotchw .gt_column_spanner_outer:first-child {
+#ppockowuua .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#twkszotchw .gt_column_spanner_outer:last-child {
+#ppockowuua .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#twkszotchw .gt_column_spanner {
+#ppockowuua .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3004,11 +3004,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#twkszotchw .gt_spanner_row {
+#ppockowuua .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#twkszotchw .gt_group_heading {
+#ppockowuua .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3034,7 +3034,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#twkszotchw .gt_empty_group_heading {
+#ppockowuua .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3049,15 +3049,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#twkszotchw .gt_from_md > :first-child {
+#ppockowuua .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#twkszotchw .gt_from_md > :last-child {
+#ppockowuua .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#twkszotchw .gt_row {
+#ppockowuua .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3076,7 +3076,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#twkszotchw .gt_stub {
+#ppockowuua .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3089,7 +3089,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twkszotchw .gt_stub_row_group {
+#ppockowuua .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3103,15 +3103,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#twkszotchw .gt_row_group_first td {
+#ppockowuua .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#twkszotchw .gt_row_group_first th {
+#ppockowuua .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#twkszotchw .gt_summary_row {
+#ppockowuua .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3121,16 +3121,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twkszotchw .gt_first_summary_row {
+#ppockowuua .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#twkszotchw .gt_first_summary_row.thick {
+#ppockowuua .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#twkszotchw .gt_last_summary_row {
+#ppockowuua .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3140,7 +3140,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twkszotchw .gt_grand_summary_row {
+#ppockowuua .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3150,7 +3150,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twkszotchw .gt_first_grand_summary_row {
+#ppockowuua .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3160,7 +3160,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#twkszotchw .gt_last_grand_summary_row_top {
+#ppockowuua .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3170,11 +3170,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twkszotchw .gt_striped {
+#ppockowuua .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#twkszotchw .gt_table_body {
+#ppockowuua .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3183,7 +3183,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twkszotchw .gt_footnotes {
+#ppockowuua .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3197,7 +3197,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twkszotchw .gt_footnote {
+#ppockowuua .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3206,7 +3206,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twkszotchw .gt_sourcenotes {
+#ppockowuua .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3220,7 +3220,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twkszotchw .gt_sourcenote {
+#ppockowuua .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3228,68 +3228,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twkszotchw .gt_left {
+#ppockowuua .gt_left {
   text-align: left;
 }
 
-#twkszotchw .gt_center {
+#ppockowuua .gt_center {
   text-align: center;
 }
 
-#twkszotchw .gt_right {
+#ppockowuua .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#twkszotchw .gt_font_normal {
+#ppockowuua .gt_font_normal {
   font-weight: normal;
 }
 
-#twkszotchw .gt_font_bold {
+#ppockowuua .gt_font_bold {
   font-weight: bold;
 }
 
-#twkszotchw .gt_font_italic {
+#ppockowuua .gt_font_italic {
   font-style: italic;
 }
 
-#twkszotchw .gt_super {
+#ppockowuua .gt_super {
   font-size: 65%;
 }
 
-#twkszotchw .gt_footnote_marks {
+#ppockowuua .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#twkszotchw .gt_asterisk {
+#ppockowuua .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#twkszotchw .gt_indent_1 {
+#ppockowuua .gt_indent_1 {
   text-indent: 5px;
 }
 
-#twkszotchw .gt_indent_2 {
+#ppockowuua .gt_indent_2 {
   text-indent: 10px;
 }
 
-#twkszotchw .gt_indent_3 {
+#ppockowuua .gt_indent_3 {
   text-indent: 15px;
 }
 
-#twkszotchw .gt_indent_4 {
+#ppockowuua .gt_indent_4 {
   text-indent: 20px;
 }
 
-#twkszotchw .gt_indent_5 {
+#ppockowuua .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <caption>Descriptive table stratified by loneliness incidence, weighted by the combined weight.</caption>
 <colgroup>
 <col style="width: 20%">
@@ -3507,18 +3507,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.004</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">163 (46.8%/50.4%)</td>
-<td class="gt_row gt_center" headers="stat_2">41 (32.8%/16.7%)</td>
-<td class="gt_row gt_center" headers="stat_0">204 (43.1%/42.4%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">185 (53.2%/49.6%)</td>
 <td class="gt_row gt_center" headers="stat_2">84 (67.2%/83.3%)</td>
 <td class="gt_row gt_center" headers="stat_0">269 (56.9%/57.6%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">163 (46.8%/50.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">41 (32.8%/16.7%)</td>
+<td class="gt_row gt_center" headers="stat_0">204 (43.1%/42.4%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -3559,18 +3559,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.6</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">231 (66.4%/62.2%)</td>
-<td class="gt_row gt_center" headers="stat_2">72 (57.6%/52.9%)</td>
-<td class="gt_row gt_center" headers="stat_0">303 (64.1%/60.0%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">117 (33.6%/37.8%)</td>
 <td class="gt_row gt_center" headers="stat_2">53 (42.4%/47.1%)</td>
 <td class="gt_row gt_center" headers="stat_0">170 (35.9%/40.0%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">231 (66.4%/62.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">72 (57.6%/52.9%)</td>
+<td class="gt_row gt_center" headers="stat_0">303 (64.1%/60.0%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -3585,18 +3585,18 @@ window.Quarto = {
 <td class="gt_row gt_center" headers="p.value">0.13</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
-<td class="gt_row gt_center" headers="stat_1">263 (75.6%/80.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">79 (63.2%/64.0%)</td>
-<td class="gt_row gt_center" headers="stat_0">342 (72.3%/76.7%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Worse</td>
 <td class="gt_row gt_center" headers="stat_1">85 (24.4%/19.3%)</td>
 <td class="gt_row gt_center" headers="stat_2">46 (36.8%/36.0%)</td>
 <td class="gt_row gt_center" headers="stat_0">131 (27.7%/23.3%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Better</td>
+<td class="gt_row gt_center" headers="stat_1">263 (75.6%/80.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">79 (63.2%/64.0%)</td>
+<td class="gt_row gt_center" headers="stat_0">342 (72.3%/76.7%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -3734,7 +3734,7 @@ window.Quarto = {
 <span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of numeric predictors of the sociodemographic domain.</caption>
 <colgroup>
 <col style="width: 13%">
@@ -3831,7 +3831,7 @@ window.Quarto = {
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of categorical predictors of the sociodemographic domain.</caption>
 <colgroup>
 <col style="width: 18%">
@@ -3993,7 +3993,7 @@ window.Quarto = {
 <span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of predictors of the lifestyle domain.</caption>
 <colgroup>
 <col style="width: 25%">
@@ -4020,22 +4020,22 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">family_relationship</td>
-<td style="text-align: left;">valueWorse</td>
-<td style="text-align: right;">0.618</td>
+<td style="text-align: left;">valueBetter</td>
+<td style="text-align: right;">-0.618</td>
 <td style="text-align: right;">0.074</td>
-<td style="text-align: right;">1.856</td>
-<td style="text-align: right;">1.604</td>
-<td style="text-align: right;">2.142</td>
+<td style="text-align: right;">0.539</td>
+<td style="text-align: right;">0.467</td>
+<td style="text-align: right;">0.623</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">friend_relationship</td>
-<td style="text-align: left;">valueWorse</td>
-<td style="text-align: right;">0.287</td>
+<td style="text-align: left;">valueBetter</td>
+<td style="text-align: right;">-0.287</td>
 <td style="text-align: right;">0.071</td>
-<td style="text-align: right;">1.332</td>
-<td style="text-align: right;">1.159</td>
-<td style="text-align: right;">1.531</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">0.653</td>
+<td style="text-align: right;">0.862</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
@@ -4050,12 +4050,12 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td style="text-align: left;">sleep_quality</td>
-<td style="text-align: left;">valueWorse</td>
-<td style="text-align: right;">1.301</td>
+<td style="text-align: left;">valueBetter</td>
+<td style="text-align: right;">-1.301</td>
 <td style="text-align: right;">0.095</td>
-<td style="text-align: right;">3.672</td>
-<td style="text-align: right;">3.061</td>
-<td style="text-align: right;">4.440</td>
+<td style="text-align: right;">0.272</td>
+<td style="text-align: right;">0.225</td>
+<td style="text-align: right;">0.327</td>
 <td style="text-align: right;">0</td>
 </tr>
 </tbody>
@@ -4112,7 +4112,7 @@ window.Quarto = {
 <span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of predictors of the social domain.</caption>
 <colgroup>
 <col style="width: 25%">
@@ -4205,7 +4205,7 @@ window.Quarto = {
 <span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of depressive and anxiety symptoms.</caption>
 <colgroup>
 <col style="width: 14%">
@@ -4292,7 +4292,7 @@ window.Quarto = {
 <span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Bivariate analysis of alcohol risk and cannabis use.</caption>
 <colgroup>
 <col style="width: 16%">
@@ -4378,7 +4378,7 @@ window.Quarto = {
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in sociodemographic domain - first entry.</caption>
 <colgroup>
 <col style="width: 46%">
@@ -4495,7 +4495,7 @@ window.Quarto = {
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in lifestyle domain - second entry.</caption>
 <colgroup>
 <col style="width: 50%">
@@ -4581,18 +4581,18 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">family_relationshipWorse</td>
-<td style="text-align: right;">1.350</td>
-<td style="text-align: right;">1.131</td>
-<td style="text-align: right;">1.610</td>
+<td style="text-align: left;">family_relationshipBetter</td>
+<td style="text-align: right;">0.740</td>
+<td style="text-align: right;">0.621</td>
+<td style="text-align: right;">0.884</td>
 <td style="text-align: right;">0.001</td>
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">friend_relationshipWorse</td>
-<td style="text-align: right;">1.027</td>
-<td style="text-align: right;">0.867</td>
-<td style="text-align: right;">1.215</td>
+<td style="text-align: left;">friend_relationshipBetter</td>
+<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">0.823</td>
+<td style="text-align: right;">1.153</td>
 <td style="text-align: right;">0.758</td>
 <td style="text-align: left;">No</td>
 </tr>
@@ -4605,10 +4605,10 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">sleep_qualityWorse</td>
-<td style="text-align: right;">3.114</td>
-<td style="text-align: right;">2.563</td>
-<td style="text-align: right;">3.808</td>
+<td style="text-align: left;">sleep_qualityBetter</td>
+<td style="text-align: right;">0.321</td>
+<td style="text-align: right;">0.263</td>
+<td style="text-align: right;">0.390</td>
 <td style="text-align: right;">0.000</td>
 <td style="text-align: left;">Yes</td>
 </tr>
@@ -4644,7 +4644,7 @@ window.Quarto = {
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in social domain - third entry.</caption>
 <colgroup>
 <col style="width: 50%">
@@ -4730,10 +4730,10 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">family_relationshipWorse</td>
-<td style="text-align: right;">1.467</td>
-<td style="text-align: right;">1.233</td>
-<td style="text-align: right;">1.745</td>
+<td style="text-align: left;">family_relationshipBetter</td>
+<td style="text-align: right;">0.682</td>
+<td style="text-align: right;">0.573</td>
+<td style="text-align: right;">0.811</td>
 <td style="text-align: right;">0.000</td>
 <td style="text-align: left;">Yes</td>
 </tr>
@@ -4746,10 +4746,10 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">sleep_qualityWorse</td>
-<td style="text-align: right;">2.967</td>
-<td style="text-align: right;">2.452</td>
-<td style="text-align: right;">3.614</td>
+<td style="text-align: left;">sleep_qualityBetter</td>
+<td style="text-align: right;">0.337</td>
+<td style="text-align: right;">0.277</td>
+<td style="text-align: right;">0.408</td>
 <td style="text-align: right;">0.000</td>
 <td style="text-align: left;">Yes</td>
 </tr>
@@ -4794,7 +4794,7 @@ window.Quarto = {
 <span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Weighted poisson regression with <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt;\)</span> 0.2 in bivariate analysis in clinical domain - fourth entry.</caption>
 <colgroup>
 <col style="width: 50%">
@@ -4880,10 +4880,10 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">family_relationshipWorse</td>
-<td style="text-align: right;">1.370</td>
-<td style="text-align: right;">1.143</td>
-<td style="text-align: right;">1.641</td>
+<td style="text-align: left;">family_relationshipBetter</td>
+<td style="text-align: right;">0.730</td>
+<td style="text-align: right;">0.609</td>
+<td style="text-align: right;">0.875</td>
 <td style="text-align: right;">0.001</td>
 <td style="text-align: left;">Yes</td>
 </tr>
@@ -4896,10 +4896,10 @@ window.Quarto = {
 <td style="text-align: left;">Yes</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">sleep_qualityWorse</td>
-<td style="text-align: right;">2.071</td>
-<td style="text-align: right;">1.683</td>
-<td style="text-align: right;">2.563</td>
+<td style="text-align: left;">sleep_qualityBetter</td>
+<td style="text-align: right;">0.483</td>
+<td style="text-align: right;">0.390</td>
+<td style="text-align: right;">0.594</td>
 <td style="text-align: right;">0.000</td>
 <td style="text-align: left;">Yes</td>
 </tr>
@@ -4953,133 +4953,216 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>block_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>block_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    friend_relationship <span class="sc">+</span> physical_activity_grouped <span class="sc">+</span> sleep_quality,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>block_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house,</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>block_4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house <span class="sc">+</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    phq_total <span class="sc">+</span> gad_total <span class="sc">+</span> alcohol_risk <span class="sc">+</span> cannabis_use,</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>huxtable<span class="sc">::</span><span class="fu">huxreg</span>(</span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">"Block 1: Sociodemographic"</span> <span class="ot">=</span> block_1,</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 2: Lifestyle"</span> <span class="ot">=</span> block_2,</span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 3: Social"</span> <span class="ot">=</span> block_3,</span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 4: Clinical"</span> <span class="ot">=</span> block_4),</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"[{conf.low},  {conf.high}], {dplyr::if_else(p.value &lt; 0.001, 'p&lt;0.001', paste0('p=', as.character(p.value)))}"</span>,</span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_pos =</span> <span class="st">"same"</span>,</span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_format =</span> <span class="st">"%.3f"</span>,</span>
-<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">n =</span> <span class="st">"nobs"</span>,</span>
-<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"-2log likelihood"</span> <span class="ot">=</span> <span class="st">"logLik"</span>,</span>
-<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>                 <span class="at">AIC =</span> <span class="st">"AIC"</span>,</span>
-<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">BIC =</span> <span class="st">"BIC"</span>),</span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer_borders =</span> <span class="dv">1</span>,</span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_args =</span> <span class="fu">list</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefs =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"(Intercept)"</span>,</span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (z-score)"</span> <span class="ot">=</span> <span class="st">"age"</span>,</span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (quadratic term)"</span> <span class="ot">=</span> <span class="st">"age_2"</span>,</span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (college education)"</span> <span class="ot">=</span> <span class="st">"education_groupedSome college education"</span>,</span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (master or PhD)"</span> <span class="ot">=</span> <span class="st">"education_groupedMaster or Doctorate"</span>,</span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex (female)"</span> <span class="ot">=</span> <span class="st">"gender_birthFemale"</span>,</span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sexual orientation (non-heterosexual)"</span> <span class="ot">=</span> <span class="st">"heterosexualNo"</span>,</span>
-<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (middle)"</span> <span class="ot">=</span> <span class="st">"household_incomeMiddle"</span>,</span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Family relationship (bad or regular)"</span> <span class="ot">=</span> <span class="st">"family_relationshipWorse"</span>,</span>
-<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Friendship relationship (bad or regular)"</span> <span class="ot">=</span> <span class="st">"friend_relationshipWorse"</span>,</span>
-<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Physical activity (more than 150 min/week)"</span> <span class="ot">=</span> <span class="st">"physical_activity_groupedMore than 150min/week"</span>,</span>
-<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sleep quality (bad or regular)"</span> <span class="ot">=</span> <span class="st">"sleep_qualityWorse"</span>,</span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of people living in your house"</span> <span class="ot">=</span> <span class="st">"number_people_house"</span>,</span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Depressive symptoms (PHQ-9)"</span> <span class="ot">=</span> <span class="st">"phq_total"</span>,</span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Anxiety symptoms (GAD-7)"</span> <span class="ot">=</span> <span class="st">"gad_total"</span>,</span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Alcohol risk zone (moderate, high or severe)"</span> <span class="ot">=</span> <span class="st">"alcohol_riskHigh risk"</span>,</span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cannabis use (yes)"</span> <span class="ot">=</span> <span class="st">"cannabis_useYes"</span>)</span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>    huxtable<span class="sc">::</span><span class="fu">set_caption</span>(<span class="st">"Multi-predictor Poisson regression analysis to</span></span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="st">        evaluate factors associated with loneliness incidence. The table</span></span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="st">        presents the risk ratios and the corresponding 95% CIs with p-values."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 1: sociodemographic</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>block_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 2: Lifestyle and social</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>block_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    friend_relationship <span class="sc">+</span> physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    number_people_house,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 3: Clinical</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>block_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> age_2 <span class="sc">+</span> education_grouped <span class="sc">+</span> gender_birth <span class="sc">+</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    heterosexual <span class="sc">+</span> household_income <span class="sc">+</span> family_relationship <span class="sc">+</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    physical_activity_grouped <span class="sc">+</span> sleep_quality <span class="sc">+</span> number_people_house <span class="sc">+</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    phq_total <span class="sc">+</span> gad_total <span class="sc">+</span> alcohol_risk <span class="sc">+</span> cannabis_use,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df_loneliness,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> combined_weight</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>huxtable<span class="sc">::</span><span class="fu">huxreg</span>(</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="st">"Block 1: Sociodemographic"</span> <span class="ot">=</span> block_1,</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 2: Lifestyle and social"</span> <span class="ot">=</span> block_2,</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Block 3: Clinical"</span> <span class="ot">=</span> block_3),</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_format =</span> <span class="st">"[{conf.low},  {conf.high}], {dplyr::if_else(p.value &lt; 0.001, 'p&lt;0.001', paste0('p=', as.character(p.value)))}"</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">error_pos =</span> <span class="st">"same"</span>,</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_format =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">n =</span> <span class="st">"nobs"</span>,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"-2log likelihood"</span> <span class="ot">=</span> <span class="st">"logLik"</span>,</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>                 <span class="at">AIC =</span> <span class="st">"AIC"</span>,</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>                 <span class="at">BIC =</span> <span class="st">"BIC"</span>),</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer_borders =</span> <span class="dv">1</span>,</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy_args =</span> <span class="fu">list</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefs =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"(Intercept)"</span>,</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (z-score)"</span> <span class="ot">=</span> <span class="st">"age"</span>,</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age (quadratic term)"</span> <span class="ot">=</span> <span class="st">"age_2"</span>,</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (college education)"</span> <span class="ot">=</span> <span class="st">"education_groupedSome college education"</span>,</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education (master or PhD)"</span> <span class="ot">=</span> <span class="st">"education_groupedMaster or Doctorate"</span>,</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex (female)"</span> <span class="ot">=</span> <span class="st">"gender_birthFemale"</span>,</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sexual orientation (non-heterosexual)"</span> <span class="ot">=</span> <span class="st">"heterosexualNo"</span>,</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (middle)"</span> <span class="ot">=</span> <span class="st">"household_incomeMiddle"</span>,</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Socioeconomic status (upper)"</span> <span class="ot">=</span> <span class="st">"household_incomeUpper"</span>,</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Positive family relationship"</span> <span class="ot">=</span> <span class="st">"family_relationshipBetter"</span>,</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Positive friendship relationship"</span> <span class="ot">=</span> <span class="st">"friend_relationshipBetter"</span>,</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Physical activity (more than 150 min/week)"</span> <span class="ot">=</span> <span class="st">"physical_activity_groupedMore than 150min/week"</span>,</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Good sleep quality"</span> <span class="ot">=</span> <span class="st">"sleep_qualityBetter"</span>,</span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of people living in your house"</span> <span class="ot">=</span> <span class="st">"number_people_house"</span>,</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Depressive symptoms (PHQ-9)"</span> <span class="ot">=</span> <span class="st">"phq_total"</span>,</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Anxiety symptoms (GAD-7)"</span> <span class="ot">=</span> <span class="st">"gad_total"</span>,</span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Alcohol risk zone (moderate, high or severe)"</span> <span class="ot">=</span> <span class="st">"alcohol_riskHigh risk"</span>,</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cannabis use (yes)"</span> <span class="ot">=</span> <span class="st">"cannabis_useYes"</span>)</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    huxtable<span class="sc">::</span><span class="fu">set_caption</span>(<span class="st">"Multi-predictor Poisson regression analysis to</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="st">        evaluate factors associated with loneliness incidence. The table</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="st">        presents the risk ratios and the corresponding 95% CIs with p-values."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:final-model">
 <caption style="caption-side: top; text-align: center;">Multi-predictor Poisson regression analysis to
         evaluate factors associated with loneliness incidence. The table
-        presents the risk ratios and the corresponding 95% CIs with p-values.</caption><colgroup><col><col><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 1: Sociodemographic</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 2: Lifestyle</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 3: Social</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 4: Clinical</th></tr>
+        presents the risk ratios and the corresponding 95% CIs with p-values.</caption><colgroup><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 1: Sociodemographic</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 2: Lifestyle and social</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Block 3: Clinical</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.175 [0.146,  0.209], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.074 [0.057,  0.094], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.102 [0.075,  0.139], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.085 [0.061,  0.117], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.175 [0.146,  0.209], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.448 [0.325,  0.616], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.240 [0.169,  0.341], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (z-score)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.412 [0.295,  0.582], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.701 [0.479,  1.037], p=0.072</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.689 [0.469,  1.022], p=0.061</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.343 [0.224,  0.529], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (z-score)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.412 [0.295,  0.582], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.693 [0.471,  1.029], p=0.066</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.343 [0.224,  0.529], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (quadratic term)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.487 [1.786,  3.433], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.523 [1.048,  2.192], p=0.026</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.480 [1.015,  2.139], p=0.039</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.849 [1.881,  4.287], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Age (quadratic term)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.487 [1.786,  3.433], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.475 [1.011,  2.133], p=0.041</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.849 [1.881,  4.287], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (college education)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.406 [0.335,  0.491], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.531 [0.438,  0.644], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.569 [0.467,  0.693], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.684 [0.551,  0.851], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (college education)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.406 [0.335,  0.491], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.567 [0.465,  0.691], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.684 [0.551,  0.851], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (master or PhD)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.460 [0.375,  0.563], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.453 [0.366,  0.561], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.462 [0.373,  0.570], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.705 [0.556,  0.893], p=0.004</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Education (master or PhD)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.460 [0.375,  0.563], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.458 [0.368,  0.568], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.705 [0.556,  0.893], p=0.004</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sex (female)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.804 [2.386,  3.304], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.381 [1.984,  2.864], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.300 [1.921,  2.759], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.719 [1.393,  2.119], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sex (female)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.804 [2.386,  3.304], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.317 [1.926,  2.795], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.719 [1.393,  2.119], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sexual orientation (non-heterosexual)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.510 [2.087,  3.012], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.226 [1.840,  2.686], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.979 [1.616,  2.418], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.518 [1.227,  1.872], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sexual orientation (non-heterosexual)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.510 [2.087,  3.012], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.976 [1.612,  2.414], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.518 [1.227,  1.872], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (middle)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.298 [1.026,  1.625], p=0.026</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.456 [1.155,  1.817], p=0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.495 [1.184,  1.867], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.388 [1.094,  1.743], p=0.006</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (middle)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.298 [1.026,  1.625], p=0.026</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.497 [1.185,  1.871], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.388 [1.094,  1.743], p=0.006</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (upper)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.171 [0.931,  1.466], p=0.173</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.353 [1.079,  1.687], p=0.008</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.427 [1.136,  1.782], p=0.002</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.361 [1.062,  1.735], p=0.014</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Socioeconomic status (upper)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.171 [0.931,  1.466], p=0.173</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.432 [1.139,  1.790], p=0.002</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.361 [1.062,  1.735], p=0.014</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Family relationship (bad or regular)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.350 [1.131,  1.610], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.467 [1.233,  1.745], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.370 [1.143,  1.641], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Positive family relationship</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.689 [0.574,  0.828], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.730 [0.609,  0.875], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Friendship relationship (bad or regular)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.027 [0.867,  1.215], p=0.758</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Positive friendship relationship</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.970 [0.817,  1.151], p=0.725</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Physical activity (more than 150 min/week)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.176 [0.081,  0.331], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.160 [0.073,  0.301], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.177 [0.078,  0.348], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Physical activity (more than 150 min/week)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.161 [0.074,  0.304], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.177 [0.078,  0.348], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Sleep quality (bad or regular)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">3.114 [2.563,  3.808], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.967 [2.452,  3.614], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">2.071 [1.683,  2.563], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Good sleep quality</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.340 [0.278,  0.414], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.483 [0.390,  0.594], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Number of people living in your house</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.902 [0.852,  0.953], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.968 [0.913,  1.024], p=0.262</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Number of people living in your house</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.902 [0.852,  0.953], p&lt;0.001</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.968 [0.913,  1.024], p=0.262</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Depressive symptoms (PHQ-9)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.214 [1.080,  1.366], p=0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Depressive symptoms (PHQ-9)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.214 [1.080,  1.366], p=0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Anxiety symptoms (GAD-7)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.191 [1.049,  1.352], p=0.007</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Anxiety symptoms (GAD-7)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.191 [1.049,  1.352], p=0.007</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Alcohol risk zone (moderate, high or severe)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.579 [1.322,  1.882], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Alcohol risk zone (moderate, high or severe)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.579 [1.322,  1.882], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Cannabis use (yes)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.750 [1.250,  2.399], p&lt;0.001</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Cannabis use (yes)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> &nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">1.750 [1.250,  2.399], p&lt;0.001</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">473&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-2log likelihood</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1804.827</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1685.485</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1678.673</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1621.319</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-2log likelihood</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1804.827</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1678.612</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1621.319</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3627.655</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3396.971</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3383.346</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3276.637</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3627.655</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3385.223</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3276.637</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3665.086</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3451.039</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3437.415</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3347.342</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3665.086</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3443.450</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3347.342</td></tr>
 </tbody></table>
 
 </div>
 </div>
+</section>
+<section id="odds-ratio-plot" class="level2">
+<h2 class="anchored" data-anchor-id="odds-ratio-plot">7.3. Odds ratio plot</h2>
+<section id="with-sort" class="level3">
+<h3 class="anchored" data-anchor-id="with-sort">7.3.1. With sort</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>or_plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(parameters<span class="sc">::</span><span class="fu">parameters</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        block_3,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">exponentiate =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        ), <span class="at">show_labels =</span> <span class="cn">TRUE</span>, <span class="at">size_text =</span> <span class="dv">6</span>, <span class="at">size_point =</span> <span class="fl">1.2</span>, <span class="at">sort =</span> <span class="st">"descending"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>     ggplot2<span class="sc">::</span><span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Physical activity [More than 150min/week]"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Age"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Sleep quality [Better]"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Education [Some college education]"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Education [Master or Doctorate]"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Family relationship [Better]"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Number of people living in your house"</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Anxiety symptoms [GAD-7]"</span>,</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Depressive symptoms [PHQ-9]"</span>,</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Household income [Upper]"</span>,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Household income [Middle]"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Heterosexual [No]"</span>,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Alcohol risk [High risk]"</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Gender birth [Female]"</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Cannabis use [Yes]"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Age (quadratic term)"</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"RR"</span>) <span class="sc">+</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"~/tmp/or_plot_loneliness_sorted.png"</span>, or_plot,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">width =</span> <span class="dv">16</span>, <span class="at">height =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>or_plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(parameters<span class="sc">::</span><span class="fu">parameters</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        block_3,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">exponentiate =</span> <span class="cn">TRUE</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        ), <span class="at">show_labels =</span> <span class="cn">TRUE</span>, <span class="at">size_text =</span> <span class="dv">6</span>, <span class="at">size_point =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>     ggplot2<span class="sc">::</span><span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Cannabis use [Yes]"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Alcohol risk [High risk]"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Anxiety symptoms [GAD-7]"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Depressive symptoms [PHQ-9]"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Number of people living in your house"</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Sleep quality [Better]"</span>,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Physical activity [More than 150min/week]"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Family relationship [Better]"</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Household income [Upper]"</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Household income [Middle]"</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Heterosexual [No]"</span>,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Gender birth [Female]"</span>,</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Education [Master or Doctorate]"</span>,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Education [Some college education]"</span>,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Age (quadratic term)"</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Age"</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">+</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"RR"</span>) <span class="sc">+</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"~/tmp/or_plot_loneliness_unsorted.png"</span>, or_plot,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">width =</span> <span class="dv">16</span>, <span class="at">height =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
 </section>
 </section>
 <section id="session-information" class="level1">
@@ -5087,12 +5170,12 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
- version  R version 4.3.2 (2023-10-31)
+ version  R version 4.4.0 (2024-04-24)
  os       Arch Linux
  system   x86_64, linux-gnu
  ui       X11
@@ -5100,89 +5183,111 @@ window.Quarto = {
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/Sao_Paulo
- date     2024-01-13
- pandoc   3.1.11 @ /usr/bin/ (via rmarkdown)
+ date     2024-06-03
+ pandoc   3.1.13 @ /usr/bin/ (via rmarkdown)
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package       * version date (UTC) lib source
- assertthat      0.2.1   2019-03-21 [1] CRAN (R 4.2.2)
- backports       1.4.1   2021-12-13 [1] CRAN (R 4.2.2)
- base64enc       0.1-3   2015-07-28 [1] CRAN (R 4.2.2)
- broom           1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
- broom.helpers   1.14.0  2023-08-07 [1] CRAN (R 4.3.1)
- broom.mixed     0.2.9.4 2022-04-17 [1] CRAN (R 4.2.2)
- cli             3.6.2   2023-12-11 [1] CRAN (R 4.3.2)
- codetools       0.2-19  2023-02-01 [2] CRAN (R 4.3.2)
- colorspace      2.1-0   2023-01-23 [1] CRAN (R 4.3.1)
- commonmark      1.9.0   2023-03-17 [1] CRAN (R 4.2.3)
- crayon          1.5.2   2022-09-29 [1] CRAN (R 4.2.2)
- DBI             1.2.0   2023-12-21 [1] CRAN (R 4.3.2)
- digest          0.6.34  2024-01-11 [1] CRAN (R 4.3.2)
- dplyr           1.1.4   2023-11-17 [1] CRAN (R 4.3.2)
- ellipsis        0.3.2   2021-04-29 [1] CRAN (R 4.2.2)
- evaluate        0.23    2023-11-01 [1] CRAN (R 4.3.2)
- fansi           1.0.6   2023-12-08 [1] CRAN (R 4.3.2)
- farver          2.1.1   2022-07-06 [1] CRAN (R 4.2.2)
- fastmap         1.1.1   2023-02-24 [1] CRAN (R 4.2.2)
- forcats         1.0.0   2023-01-29 [1] CRAN (R 4.2.2)
- furrr           0.3.1   2022-08-15 [1] CRAN (R 4.2.2)
- future          1.33.1  2023-12-22 [1] CRAN (R 4.3.2)
- generics        0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
- ggplot2         3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
- globals         0.16.2  2022-11-21 [1] CRAN (R 4.2.2)
- glue            1.7.0   2024-01-09 [1] CRAN (R 4.3.2)
- gt              0.10.0  2023-10-07 [1] CRAN (R 4.3.1)
- gtable          0.3.4   2023-08-21 [1] CRAN (R 4.3.1)
- gtsummary       1.7.2   2023-07-15 [1] CRAN (R 4.3.1)
- haven           2.5.4   2023-11-30 [1] CRAN (R 4.3.2)
- hms             1.1.3   2023-03-21 [1] CRAN (R 4.2.3)
- htmltools       0.5.7   2023-11-03 [1] CRAN (R 4.3.2)
- htmlwidgets     1.6.4   2023-12-06 [1] CRAN (R 4.3.2)
- huxtable        5.5.3   2023-12-09 [1] CRAN (R 4.3.2)
- janitor         2.2.0   2023-02-02 [1] CRAN (R 4.2.2)
- jsonlite        1.8.8   2023-12-04 [1] CRAN (R 4.3.2)
- knitr           1.45    2023-10-30 [1] CRAN (R 4.3.1)
- labeling        0.4.3   2023-08-29 [1] CRAN (R 4.3.1)
- lattice         0.22-5  2023-10-24 [2] CRAN (R 4.3.2)
- lifecycle       1.0.4   2023-11-07 [1] CRAN (R 4.3.2)
- listenv         0.9.0   2022-12-16 [1] CRAN (R 4.2.2)
- lubridate       1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
- magrittr        2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
- markdown        1.12    2023-12-06 [1] CRAN (R 4.3.2)
- MASS            7.3-60  2023-05-04 [1] CRAN (R 4.3.0)
- Matrix          1.6-5   2024-01-11 [1] CRAN (R 4.3.2)
- mitools         2.4     2019-04-26 [1] CRAN (R 4.2.2)
- munsell         0.5.0   2018-06-12 [1] CRAN (R 4.2.2)
- nlme            3.1-164 2023-11-27 [1] CRAN (R 4.3.2)
- parallelly      1.36.0  2023-05-26 [1] CRAN (R 4.3.0)
- pillar          1.9.0   2023-03-22 [1] CRAN (R 4.2.3)
- pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
- purrr           1.0.2   2023-08-10 [1] CRAN (R 4.3.1)
- R6              2.5.1   2021-08-19 [1] CRAN (R 4.2.2)
- readr           2.1.5   2024-01-10 [1] CRAN (R 4.3.2)
- repr            1.1.6   2023-01-26 [1] CRAN (R 4.2.3)
- rlang           1.1.3   2024-01-10 [1] CRAN (R 4.3.2)
- rmarkdown       2.25    2023-09-18 [1] CRAN (R 4.3.1)
- sass            0.4.8   2023-12-06 [1] CRAN (R 4.3.2)
- scales          1.3.0   2023-11-28 [1] CRAN (R 4.3.2)
- sessioninfo     1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
- skimr           2.1.5   2022-12-23 [1] CRAN (R 4.2.3)
- snakecase       0.11.1  2023-08-27 [1] CRAN (R 4.3.1)
- stringi         1.8.3   2023-12-11 [1] CRAN (R 4.3.2)
- stringr         1.5.1   2023-11-14 [1] CRAN (R 4.3.2)
- survey          4.2-1   2023-05-03 [1] CRAN (R 4.3.0)
- survival        3.5-7   2023-08-14 [1] CRAN (R 4.3.1)
- tibble          3.2.1   2023-03-20 [1] CRAN (R 4.2.3)
- tidyr           1.3.0   2023-01-24 [1] CRAN (R 4.2.2)
- tidyselect      1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
- timechange      0.2.0   2023-01-11 [1] CRAN (R 4.2.2)
- tzdb            0.4.0   2023-05-12 [1] CRAN (R 4.3.0)
- utf8            1.2.4   2023-10-22 [1] CRAN (R 4.3.1)
- vctrs           0.6.5   2023-12-01 [1] CRAN (R 4.3.2)
- withr           2.5.2   2023-10-30 [1] CRAN (R 4.3.1)
- xfun            0.41    2023-11-01 [1] CRAN (R 4.3.2)
- xml2            1.3.6   2023-12-04 [1] CRAN (R 4.3.2)
- yaml            2.3.8   2023-12-11 [1] CRAN (R 4.3.2)
+ package       * version  date (UTC) lib source
+ assertthat      0.2.1    2019-03-21 [1] CRAN (R 4.2.2)
+ backports       1.5.0    2024-05-23 [1] CRAN (R 4.4.0)
+ base64enc       0.1-3    2015-07-28 [1] CRAN (R 4.2.2)
+ bayestestR      0.13.2   2024-02-12 [1] CRAN (R 4.3.2)
+ broom           1.0.6    2024-05-17 [1] CRAN (R 4.4.0)
+ broom.helpers   1.15.0   2024-04-05 [1] CRAN (R 4.3.3)
+ broom.mixed     0.2.9.5  2024-04-01 [1] CRAN (R 4.3.3)
+ cli             3.6.2    2023-12-11 [1] CRAN (R 4.3.2)
+ coda            0.19-4.1 2024-01-31 [1] CRAN (R 4.3.2)
+ codetools       0.2-20   2024-03-31 [2] CRAN (R 4.4.0)
+ colorspace      2.1-0    2023-01-23 [1] CRAN (R 4.3.1)
+ commonmark      1.9.1    2024-01-30 [1] CRAN (R 4.3.2)
+ crayon          1.5.2    2022-09-29 [1] CRAN (R 4.2.2)
+ datawizard      0.10.0   2024-03-26 [1] CRAN (R 4.3.3)
+ DBI             1.2.2    2024-02-16 [1] CRAN (R 4.3.2)
+ digest          0.6.35   2024-03-11 [1] CRAN (R 4.3.3)
+ dplyr           1.1.4    2023-11-17 [1] CRAN (R 4.3.2)
+ emmeans         1.10.2   2024-05-20 [1] CRAN (R 4.4.0)
+ estimability    1.5.1    2024-05-12 [1] CRAN (R 4.4.0)
+ evaluate        0.23     2023-11-01 [1] CRAN (R 4.3.2)
+ fansi           1.0.6    2023-12-08 [1] CRAN (R 4.3.2)
+ farver          2.1.2    2024-05-13 [1] CRAN (R 4.4.0)
+ fastmap         1.2.0    2024-05-15 [1] CRAN (R 4.4.0)
+ forcats         1.0.0    2023-01-29 [1] CRAN (R 4.2.2)
+ furrr           0.3.1    2022-08-15 [1] CRAN (R 4.2.2)
+ future          1.33.2   2024-03-26 [1] CRAN (R 4.3.3)
+ generics        0.1.3    2022-07-05 [1] CRAN (R 4.2.2)
+ ggplot2         3.5.1    2024-04-23 [1] CRAN (R 4.3.3)
+ globals         0.16.3   2024-03-08 [1] CRAN (R 4.3.3)
+ glue            1.7.0    2024-01-09 [1] CRAN (R 4.3.2)
+ gt              0.10.1   2024-01-17 [1] CRAN (R 4.3.2)
+ gtable          0.3.5    2024-04-22 [1] CRAN (R 4.3.3)
+ gtsummary       1.7.2    2023-07-15 [1] CRAN (R 4.3.1)
+ haven           2.5.4    2023-11-30 [1] CRAN (R 4.3.2)
+ hms             1.1.3    2023-03-21 [1] CRAN (R 4.2.3)
+ htmltools       0.5.8.1  2024-04-04 [1] CRAN (R 4.3.3)
+ htmlwidgets     1.6.4    2023-12-06 [1] CRAN (R 4.3.2)
+ huxtable        5.5.6    2024-02-15 [1] CRAN (R 4.3.2)
+ insight         0.19.11  2024-05-12 [1] CRAN (R 4.4.0)
+ janitor         2.2.0    2023-02-02 [1] CRAN (R 4.2.2)
+ jsonlite        1.8.8    2023-12-04 [1] CRAN (R 4.3.2)
+ knitr           1.47     2024-05-29 [1] CRAN (R 4.4.0)
+ labeling        0.4.3    2023-08-29 [1] CRAN (R 4.3.1)
+ later           1.3.2    2023-12-06 [1] CRAN (R 4.3.2)
+ lattice         0.22-6   2024-03-20 [2] CRAN (R 4.4.0)
+ lifecycle       1.0.4    2023-11-07 [1] CRAN (R 4.3.2)
+ listenv         0.9.1    2024-01-29 [1] CRAN (R 4.3.2)
+ lubridate       1.9.3    2023-09-27 [1] CRAN (R 4.3.1)
+ magrittr        2.0.3    2022-03-30 [1] CRAN (R 4.2.2)
+ markdown        1.12     2023-12-06 [1] CRAN (R 4.3.2)
+ MASS            7.3-60.2 2024-04-26 [1] CRAN (R 4.4.0)
+ Matrix          1.7-0    2024-04-26 [1] CRAN (R 4.4.0)
+ mitools         2.4      2019-04-26 [1] CRAN (R 4.2.2)
+ multcomp        1.4-25   2023-06-20 [1] CRAN (R 4.3.1)
+ munsell         0.5.1    2024-04-01 [1] CRAN (R 4.3.3)
+ mvtnorm         1.2-5    2024-05-21 [1] CRAN (R 4.4.0)
+ nlme            3.1-164  2023-11-27 [1] CRAN (R 4.3.2)
+ parallelly      1.37.1   2024-02-29 [1] CRAN (R 4.3.2)
+ parameters      0.21.7   2024-05-14 [1] CRAN (R 4.4.0)
+ pillar          1.9.0    2023-03-22 [1] CRAN (R 4.2.3)
+ pkgconfig       2.0.3    2019-09-22 [1] CRAN (R 4.2.2)
+ processx        3.8.4    2024-03-16 [1] CRAN (R 4.3.3)
+ ps              1.7.6    2024-01-18 [1] CRAN (R 4.3.2)
+ purrr           1.0.2    2023-08-10 [1] CRAN (R 4.3.1)
+ quarto          1.4      2024-03-06 [1] CRAN (R 4.3.3)
+ R6              2.5.1    2021-08-19 [1] CRAN (R 4.2.2)
+ ragg            1.3.2    2024-05-15 [1] CRAN (R 4.4.0)
+ Rcpp            1.0.12   2024-01-09 [1] CRAN (R 4.3.2)
+ readr           2.1.5    2024-01-10 [1] CRAN (R 4.3.2)
+ repr            1.1.7    2024-03-22 [1] CRAN (R 4.3.3)
+ rlang           1.1.3    2024-01-10 [1] CRAN (R 4.3.2)
+ rmarkdown       2.27     2024-05-17 [1] CRAN (R 4.4.0)
+ rstudioapi      0.16.0   2024-03-24 [1] CRAN (R 4.3.3)
+ sandwich        3.1-0    2023-12-11 [1] CRAN (R 4.3.2)
+ sass            0.4.9    2024-03-15 [1] CRAN (R 4.3.3)
+ scales          1.3.0    2023-11-28 [1] CRAN (R 4.3.2)
+ see             0.8.4    2024-04-29 [1] CRAN (R 4.4.0)
+ sessioninfo     1.2.2    2021-12-06 [1] CRAN (R 4.2.2)
+ skimr           2.1.5    2022-12-23 [1] CRAN (R 4.2.3)
+ snakecase       0.11.1   2023-08-27 [1] CRAN (R 4.3.1)
+ stringi         1.8.4    2024-05-06 [1] CRAN (R 4.4.0)
+ stringr         1.5.1    2023-11-14 [1] CRAN (R 4.3.2)
+ survey          4.4-2    2024-03-20 [1] CRAN (R 4.3.3)
+ survival        3.6-4    2024-04-24 [1] CRAN (R 4.4.0)
+ systemfonts     1.1.0    2024-05-15 [1] CRAN (R 4.4.0)
+ textshaping     0.4.0    2024-05-24 [1] CRAN (R 4.4.0)
+ TH.data         1.1-2    2023-04-17 [1] CRAN (R 4.3.0)
+ tibble          3.2.1    2023-03-20 [1] CRAN (R 4.2.3)
+ tidyr           1.3.1    2024-01-24 [1] CRAN (R 4.3.2)
+ tidyselect      1.2.1    2024-03-11 [1] CRAN (R 4.3.3)
+ timechange      0.3.0    2024-01-18 [1] CRAN (R 4.3.2)
+ tzdb            0.4.0    2023-05-12 [1] CRAN (R 4.3.0)
+ utf8            1.2.4    2023-10-22 [1] CRAN (R 4.3.1)
+ vctrs           0.6.5    2023-12-01 [1] CRAN (R 4.3.2)
+ withr           3.0.0    2024-01-16 [1] CRAN (R 4.3.2)
+ xfun            0.44     2024-05-15 [1] CRAN (R 4.4.0)
+ xml2            1.3.6    2023-12-04 [1] CRAN (R 4.3.2)
+ xtable          1.8-4    2019-04-21 [1] CRAN (R 4.2.2)
+ yaml            2.3.8    2023-12-11 [1] CRAN (R 4.3.2)
+ zoo             1.8-12   2023-04-13 [1] CRAN (R 4.3.0)
 
  [1] /home/bruno/.local/share/r
  [2] /usr/lib/R/library
@@ -5229,18 +5334,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -5272,7 +5366,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -5307,7 +5441,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -5355,7 +5493,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
