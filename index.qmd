@@ -560,6 +560,7 @@ df_ls <- df_loneliness |>
         sleep_quality,
         family_relationship,
         friend_relationship,
+        marital_status_grouped,
         combined_weight
     )
 
@@ -744,10 +745,10 @@ significance cut-off.
 
 We sequentially added the significant variables from the last analyses into the
 Poisson regression, starting from the most distal domain to the most proximal
-one (sociodemographic $\rightarrow$ lifestyle $\rightarrow$ social
-$\rightarrow$ clinical). The variables that presented $p<0.1$ in the entry
-stage remained in the model until the end, even if they lost their significance
-in later stages, and those with $p<0.05$ were considered significant. 
+one (sociodemographic $\rightarrow$ lifestyle/social $\rightarrow$ clinical).
+The variables that presented $p<0.1$ in the entry stage remained in the model
+until the end, even if they lost their significance in later stages, and those
+with $p<0.05$ were considered significant. 
 
 ## 7.1. Domain-based models
 
@@ -755,7 +756,8 @@ in later stages, and those with $p<0.05$ were considered significant.
 # Sociodemographic domain - first entry
 df_loneliness |>
     glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-        heterosexual + household_income,
+        heterosexual + household_income + number_people_house +
+        marital_status_grouped,
         data = _,
         family = poisson(link = "log"),
         weights = combined_weight
@@ -777,11 +779,12 @@ df_loneliness |>
         $<$ 0.2 in bivariate analysis in sociodemographic domain - first entry."
     )
 
-# Lifestyle domain - second entry
+# Lifestyle and social domain - second entry
 df_loneliness |>
     glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-        heterosexual + household_income + family_relationship +
-        friend_relationship + physical_activity_grouped + sleep_quality,
+        heterosexual + household_income + number_people_house +
+        marital_status_grouped + family_relationship + friend_relationship +
+        physical_activity_grouped + sleep_quality,
         data = _,
         family = poisson(link = "log"),
         weights = combined_weight
@@ -800,14 +803,17 @@ df_loneliness |>
     knitr::kable(
         digits = 3,
         caption = "Weighted poisson regression with $p$-value
-        $<$ 0.2 in bivariate analysis in lifestyle domain - second entry."
+        $<$ 0.2 in bivariate analysis in lifestyle and social domain -
+        second entry."
     )
 
-# Social domain - third entry
+# Clinical domain - third entry
 df_loneliness |>
     glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-        heterosexual + household_income + family_relationship +
-        physical_activity_grouped + sleep_quality + number_people_house,
+        heterosexual + household_income + number_people_house +
+        marital_status_grouped + family_relationship + friend_relationship +
+        physical_activity_grouped + sleep_quality + phq_total + gad_total +
+        alcohol_risk + cannabis_use,
         data = _,
         family = poisson(link = "log"),
         weights = combined_weight
@@ -826,34 +832,7 @@ df_loneliness |>
     knitr::kable(
         digits = 3,
         caption = "Weighted poisson regression with $p$-value
-        $<$ 0.2 in bivariate analysis in social domain - third entry."
-    )
-
-# Clinical domain - fourth entry
-df_loneliness |>
-    glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-        heterosexual + household_income + family_relationship +
-        physical_activity_grouped + sleep_quality + number_people_house +
-        phq_total + gad_total + alcohol_risk + cannabis_use,
-        data = _,
-        family = poisson(link = "log"),
-        weights = combined_weight
-    ) |>
-    broom::tidy(conf.int = TRUE) |>
-    dplyr::select(-statistic, -std.error) |>
-    dplyr::mutate(dplyr::across(c(estimate, conf.low, conf.high),
-                                exp)) |>
-    dplyr::filter(term != "(Intercept)") |>
-    dplyr::relocate(p.value, .after = dplyr::last_col()) |>
-    dplyr::relocate(estimate, .before = conf.low) |>
-    dplyr::mutate(p_lt_01 = dplyr::if_else(p.value < 0.1, "Yes", "No")) |>
-    purrr::set_names(
-        "Variable", "RR", "RR (lower)", "RR (upper)", "$p$-value", "$p<0.1$"
-    ) |>
-    knitr::kable(
-        digits = 3,
-        caption = "Weighted poisson regression with $p$-value
-        $<$ 0.2 in bivariate analysis in clinical domain - fourth entry."
+        $<$ 0.2 in bivariate analysis in clinical domain - third entry."
     )
 ```
 
@@ -862,7 +841,8 @@ df_loneliness |>
 ```{r final-model}
 # Block 1: sociodemographic
 block_1 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-    heterosexual + household_income,
+    heterosexual + household_income + number_people_house +
+    marital_status_grouped,
     data = df_loneliness,
     family = poisson(link = "log"),
     weights = combined_weight
@@ -870,9 +850,9 @@ block_1 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
 
 # Block 2: Lifestyle and social
 block_2 <- glm(outcome ~ age + age_2 + education_grouped + gender_birth +
-    heterosexual + household_income + family_relationship +
-    friend_relationship + physical_activity_grouped + sleep_quality +
-    number_people_house,
+    heterosexual + household_income +
+    number_people_house + family_relationship + friend_relationship +
+    physical_activity_grouped + sleep_quality,
     data = df_loneliness,
     family = poisson(link = "log"),
     weights = combined_weight
@@ -904,7 +884,8 @@ huxtable::huxreg(
   ci_level = 0.95,
   outer_borders = 1,
   tidy_args = list(exponentiate = TRUE, conf.int = TRUE),
-  coefs = c("(Intercept)" = "(Intercept)",
+  coefs = c(
+    "(Intercept)" = "(Intercept)",
     "Age (z-score)" = "age",
     "Age (quadratic term)" = "age_2",
     "Education (college education)" = "education_groupedSome college education",
@@ -914,11 +895,12 @@ huxtable::huxreg(
     "Socioeconomic status (middle)" = "household_incomeMiddle",
     "Socioeconomic status (upper)" = "household_incomeUpper",
     "Socioeconomic status (upper)" = "household_incomeUpper",
+    "Number of people living in your house" = "number_people_house",
+    "Marital status (with partner)" = "marital_status_groupedWith partner",
     "Positive family relationship" = "family_relationshipBetter",
     "Positive friendship relationship" = "friend_relationshipBetter",
     "Physical activity (more than 150 min/week)" = "physical_activity_groupedMore than 150min/week",
     "Good sleep quality" = "sleep_qualityBetter",
-    "Number of people living in your house" = "number_people_house",
     "Depressive symptoms (PHQ-9)" = "phq_total",
     "Anxiety symptoms (GAD-7)" = "gad_total",
     "Alcohol risk zone (moderate, high or severe)" = "alcohol_riskHigh risk",
